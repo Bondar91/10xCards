@@ -1,0 +1,4 @@
+# Cloudflare Workers local dev secrets — copy to .dev.vars (never commit .dev.vars)
+# Used by `wrangler dev`. Values are found in your Supabase project → Settings → API
+SUPABASE_URL=https://<your-project-ref>.supabase.co
+SUPABASE_KEY=<your-anon-public-key>

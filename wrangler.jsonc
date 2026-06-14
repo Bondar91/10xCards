@@ -1,0 +1,32 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "10xcards",
+  "main": "@astrojs/cloudflare/entrypoints/server",
+  "compatibility_date": "2026-05-08",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "binding": "ASSETS",
+    "directory": "./dist",
+    "not_found_handling": "404-page",
+  },
+  "observability": {
+    "enabled": true,
+  },
+  // Build command used by Cloudflare's Git integration CI pipeline.
+  "build": {
+    "command": "npm run build",
+  },
+  // NON-SECRET runtime config only. Secrets (SUPABASE_URL, SUPABASE_KEY) must NOT appear here.
+  // Use `wrangler secret put` for production secrets; `.dev.vars` for local dev.
+  "vars": {},
+  // Preview environment — deployed with `wrangler deploy --env preview`
+  // Secrets for this env must be set separately (they do NOT inherit from production):
+  //   npx wrangler secret put SUPABASE_URL --env preview
+  //   npx wrangler secret put SUPABASE_KEY --env preview
+  "env": {
+    "preview": {
+      "name": "10xcards-preview",
+      "vars": {},
+    },
+  },
+}
