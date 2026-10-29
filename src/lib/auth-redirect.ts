@@ -1,5 +1,20 @@
 const DEFAULT_REDIRECT = "/dashboard";
 
+// States shown on /auth/confirm-email; unknown values fall back to "sent".
+export const CONFIRM_REASONS = [
+  "sent",
+  "unconfirmed",
+  "expired",
+  "resent",
+] as const;
+export type ConfirmReason = (typeof CONFIRM_REASONS)[number];
+
+export function parseConfirmReason(
+  raw: string | null | undefined,
+): ConfirmReason {
+  return CONFIRM_REASONS.find((reason) => reason === raw) ?? "sent";
+}
+
 /**
  * Turns an untrusted `next` value into a same-origin path.
  * Rejects protocol-relative (`//`), backslash (`/\`, browsers treat it as `//`),

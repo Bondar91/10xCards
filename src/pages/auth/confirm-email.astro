@@ -1,21 +1,35 @@
 ---
 import Layout from "@/layouts/Layout.astro";
+import ResendConfirmationForm from "@/components/auth/ResendConfirmationForm";
+import { parseConfirmReason, type ConfirmReason } from "@/lib/auth-redirect";
 
-const isAutoConfirmed = import.meta.env.DEV;
+const reason = parseConfirmReason(Astro.url.searchParams.get("reason"));
+const error = Astro.url.searchParams.get("error");
 
-const content = isAutoConfirmed
-  ? {
-      emoji: "✅",
-      heading: "Registration successful",
-      description: "Your account has been created. You can now sign in.",
-      linkText: "Go to sign in",
-    }
-  : {
-      emoji: "📧",
-      heading: "Check your email",
-      description: "We've sent a confirmation link to your email address. Click it to activate your account.",
-      linkText: "Back to sign in",
-    };
+const CONTENT: Record<ConfirmReason, { emoji: string; heading: string; description: string }> = {
+  sent: {
+    emoji: "📧",
+    heading: "Sprawdź skrzynkę",
+    description: "Wysłaliśmy link potwierdzający na Twój adres e-mail. Kliknij go, aby aktywować konto.",
+  },
+  unconfirmed: {
+    emoji: "✉️",
+    heading: "Potwierdź adres e-mail",
+    description: "Twoje konto nie zostało jeszcze potwierdzone. Kliknij link z wiadomości albo wyślij go ponownie.",
+  },
+  expired: {
+    emoji: "⏳",
+    heading: "Link wygasł",
+    description: "Link potwierdzający wygasł lub został już użyty. Wyślij nowy link poniżej.",
+  },
+  resent: {
+    emoji: "📨",
+    heading: "Wysłaliśmy nowy link",
+    description: "Jeśli konto z tym adresem istnieje i nie jest potwierdzone, nowy link jest już w drodze.",
+  },
+};
+
+const content = CONTENT[reason];
 ---
 
 <Layout title={content.heading}>
@@ -28,8 +42,9 @@ const content = isAutoConfirmed
         {content.heading}
       </h1>
       <p class="mb-6 text-blue-100/80">{content.description}</p>
-      <a href="/auth/signin" class="text-sm text-purple-300 hover:underline">
-        {content.linkText}
+      <ResendConfirmationForm reason={reason} serverError={error} client:load />
+      <a href="/auth/signin" class="mt-6 inline-block text-sm text-purple-300 hover:underline">
+        Wróć do logowania
       </a>
     </div>
   </div>

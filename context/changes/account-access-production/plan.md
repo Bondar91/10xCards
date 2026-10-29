@@ -287,29 +287,29 @@ No database changes. Existing production accounts (if any were created with the 
 
 #### Automated
 
-- [x] 1.1 Changed files lint clean
-- [x] 1.2 Production build passes: `npm run build`
+- [x] 1.1 Changed files lint clean — 4d6dabf
+- [x] 1.2 Production build passes: `npm run build` — 4d6dabf
 
 #### Manual
 
-- [x] 1.3 wrangler dev: anonymous /dashboard redirects with next and returns after sign-in
-- [x] 1.4 wrangler dev: anonymous API request returns 401 JSON from middleware
-- [x] 1.5 wrangler dev: unsafe next values fall back to /dashboard
-- [x] 1.6 wrangler dev: signed-in /auth/signin redirects; wrong password shows Polish message
+- [x] 1.3 wrangler dev: anonymous /dashboard redirects with next and returns after sign-in — 4d6dabf
+- [x] 1.4 wrangler dev: anonymous API request returns 401 JSON from middleware — 4d6dabf
+- [x] 1.5 wrangler dev: unsafe next values fall back to /dashboard — 4d6dabf
+- [x] 1.6 wrangler dev: signed-in /auth/signin redirects; wrong password shows Polish message — 4d6dabf
 
 ### Phase 2: Email confirmation flow and Polish UI
 
 #### Automated
 
-- [ ] 2.1 Changed files lint clean
-- [ ] 2.2 Production build passes: `npm run build`
+- [x] 2.1 Changed files lint clean
+- [x] 2.2 Production build passes: `npm run build`
 
 #### Manual
 
-- [ ] 2.3 wrangler dev: /auth/confirm without params lands on expired state
-- [ ] 2.4 wrangler dev: all reason variants render Polish copy; resend shows resent state
-- [ ] 2.5 wrangler dev: sign-up with confirmations off lands on /dashboard
-- [ ] 2.6 No English UI strings on auth screens, Topbar and dashboard
+- [x] 2.3 wrangler dev: /auth/confirm without params lands on expired state
+- [x] 2.4 wrangler dev: all reason variants render Polish copy; resend shows resent state
+- [x] 2.5 wrangler dev: sign-up with confirmations off lands on /dashboard
+- [x] 2.6 No English UI strings on auth screens, Topbar and dashboard
 
 ### Phase 3: Production configuration and smoke tests
 
