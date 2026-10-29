@@ -2,3 +2,8 @@
 # Used by `wrangler dev`. Values are found in your Supabase project → Settings → API
 SUPABASE_URL=https://<your-project-ref>.supabase.co
 SUPABASE_KEY=<your-anon-public-key>
+
+# OpenRouter (AI flashcard generation) — key from https://openrouter.ai/settings/keys
+OPENROUTER_API_KEY=<your-openrouter-key>
+# Must be a non-reasoning model with a Zero Data Retention endpoint on OpenRouter
+OPENROUTER_MODEL=mistralai/mistral-small-3.2-24b-instruct

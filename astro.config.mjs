@@ -16,8 +16,27 @@ export default defineConfig({
   adapter: cloudflare(),
   env: {
     schema: {
-      SUPABASE_URL: envField.string({ context: "server", access: "secret", optional: true }),
-      SUPABASE_KEY: envField.string({ context: "server", access: "secret", optional: true }),
+      SUPABASE_URL: envField.string({
+        context: "server",
+        access: "secret",
+        optional: true,
+      }),
+      SUPABASE_KEY: envField.string({
+        context: "server",
+        access: "secret",
+        optional: true,
+      }),
+      OPENROUTER_API_KEY: envField.string({
+        context: "server",
+        access: "secret",
+        optional: true,
+      }),
+      // "secret" so it is read from Worker bindings at runtime — "public" server vars are inlined at build time.
+      OPENROUTER_MODEL: envField.string({
+        context: "server",
+        access: "secret",
+        default: "mistralai/mistral-small-3.2-24b-instruct",
+      }),
     },
   },
 });

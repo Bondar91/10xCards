@@ -16,17 +16,23 @@
   "build": {
     "command": "npm run build",
   },
-  // NON-SECRET runtime config only. Secrets (SUPABASE_URL, SUPABASE_KEY) must NOT appear here.
+  // NON-SECRET runtime config only. Secrets (SUPABASE_URL, SUPABASE_KEY, OPENROUTER_API_KEY) must NOT appear here.
   // Use `wrangler secret put` for production secrets; `.dev.vars` for local dev.
-  "vars": {},
+  "vars": {
+    // Must have a Zero Data Retention endpoint on OpenRouter and be a non-reasoning model.
+    "OPENROUTER_MODEL": "mistralai/mistral-small-3.2-24b-instruct",
+  },
   // Preview environment — deployed with `wrangler deploy --env preview`
   // Secrets for this env must be set separately (they do NOT inherit from production):
   //   npx wrangler secret put SUPABASE_URL --env preview
   //   npx wrangler secret put SUPABASE_KEY --env preview
+  //   npx wrangler secret put OPENROUTER_API_KEY --env preview
   "env": {
     "preview": {
       "name": "10xcards-preview",
-      "vars": {},
+      "vars": {
+        "OPENROUTER_MODEL": "mistralai/mistral-small-3.2-24b-instruct",
+      },
     },
   },
 }
