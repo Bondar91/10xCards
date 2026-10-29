@@ -301,29 +301,29 @@ No database changes. Existing production accounts (if any were created with the 
 
 #### Automated
 
-- [x] 2.1 Changed files lint clean
-- [x] 2.2 Production build passes: `npm run build`
+- [x] 2.1 Changed files lint clean — f23dd51
+- [x] 2.2 Production build passes: `npm run build` — f23dd51
 
 #### Manual
 
-- [x] 2.3 wrangler dev: /auth/confirm without params lands on expired state
-- [x] 2.4 wrangler dev: all reason variants render Polish copy; resend shows resent state
-- [x] 2.5 wrangler dev: sign-up with confirmations off lands on /dashboard
-- [x] 2.6 No English UI strings on auth screens, Topbar and dashboard
+- [x] 2.3 wrangler dev: /auth/confirm without params lands on expired state — f23dd51
+- [x] 2.4 wrangler dev: all reason variants render Polish copy; resend shows resent state — f23dd51
+- [x] 2.5 wrangler dev: sign-up with confirmations off lands on /dashboard — f23dd51
+- [x] 2.6 No English UI strings on auth screens, Topbar and dashboard — f23dd51
 
 ### Phase 3: Production configuration and smoke tests
 
 #### Automated
 
-- [ ] 3.1 Production build passes: `npm run build`
-- [ ] 3.2 Production /dashboard returns 302 for anonymous curl
+- [x] 3.1 Production build passes: `npm run build`
+- [x] 3.2 Production /dashboard returns 302 for anonymous curl
 
 #### Manual
 
-- [ ] 3.3 Supabase URL config, confirm-email setting and Polish template set
-- [ ] 3.4 Production: cross-device email confirmation lands signed in on /dashboard
-- [ ] 3.5 Production: unconfirmed sign-in shows state page and resend delivers a link
-- [ ] 3.6 Production: reused link shows expired state
-- [ ] 3.7 Production: sign-in to /dashboard and sign-out to / with protection restored
-- [ ] 3.8 Production: anonymous /dashboard returns to /dashboard after login via next
-- [ ] 3.9 wrangler tail clean; CPU times recorded in change.md Evidence
+- [x] 3.3 Supabase URL config, confirm-email setting and Polish template set
+- [x] 3.4 Production: cross-device email confirmation lands signed in on /dashboard
+- [x] 3.5 Production: unconfirmed sign-in shows state page and resend delivers a link
+- [x] 3.6 Production: reused link shows expired state
+- [x] 3.7 Production: sign-in to /dashboard and sign-out to / with protection restored
+- [x] 3.8 Production: anonymous /dashboard returns to /dashboard after login via next
+- [x] 3.9 wrangler tail clean; CPU times recorded in change.md Evidence

@@ -10,24 +10,24 @@ The scaffold is already wired for Cloudflare Workers (`wrangler.jsonc` has `main
 
 ### 0a — Wrangler CLI (Cloudflare)
 
-- [ ] Verify Node.js ≥ 22 is active:
+- [x] Verify Node.js ≥ 22 is active:
   ```bash
   node -v   # should print v22.x.x
   ```
   If not, switch via nvm: `nvm use` (`.nvmrc` pins 22.14.0).
 
-- [ ] Confirm wrangler is available (already a dev dependency — no global install needed):
+- [x] Confirm wrangler is available (already a dev dependency — no global install needed):
   ```bash
   npx wrangler --version   # should print wrangler 4.x.x
   ```
 
-- [ ] Authenticate with your Cloudflare account (one-time per machine, opens browser):
+- [x] Authenticate with your Cloudflare account (one-time per machine, opens browser):
   ```bash
   npx wrangler login
   npx wrangler whoami   # confirm: prints account email + account ID
   ```
 
-- [ ] Note your **Account ID** — needed when configuring the Cloudflare dashboard Git integration.
+- [x] Note your **Account ID** — needed when configuring the Cloudflare dashboard Git integration.
 
 **Edge case — multiple Cloudflare accounts:** `wrangler login` picks the default account. Override per-command with `--account-id <id>` or set `CLOUDFLARE_ACCOUNT_ID` in `.dev.vars`.
 
@@ -35,16 +35,37 @@ The scaffold is already wired for Cloudflare Workers (`wrangler.jsonc` has `main
 
 ---
 
-### 0b — Supabase project setup
+### 0b — GitHub repository setup
+
+- [x] Authenticate GitHub CLI (one-time per machine, opens browser):
+  ```bash
+  gh auth login
+  gh auth status   # confirm: logged in to github.com
+  ```
+- [x] Create repo and push (if repo doesn't exist yet):
+  ```bash
+  gh repo create 10xcards --private --source=. --remote=origin --push
+  ```
+  Or if repo already exists — add remote and push:
+  ```bash
+  git remote add origin https://github.com/<username>/10xcards.git
+  git push -u origin main
+  ```
+
+> **Why here:** Cloudflare Git integration (Phase 6) requires the repo to exist on GitHub before it can be connected. `gh auth login` is for pushing code — Cloudflare connects to GitHub via its own OAuth in the dashboard.
+
+---
+
+### 0c — Supabase project setup
 
 #### Option A — Supabase Cloud (recommended for MVP)
 
-- [ ] Create a free project at [supabase.com](https://supabase.com) if you don't have one. Choose a region close to your primary user base (reduces DB round-trip latency — see `context/foundation/infrastructure.md` risk register).
-- [ ] Go to **Project Settings → API** and copy:
+- [x] Create a free project at [supabase.com](https://supabase.com) if you don't have one. Choose a region close to your primary user base (reduces DB round-trip latency — see `context/foundation/infrastructure.md` risk register).
+- [x] Go to **Project Settings → API** and copy:
   - **Project URL** → this is `SUPABASE_URL`
   - **anon / public** key → this is `SUPABASE_KEY`
   - **Do NOT use the `service_role` key** — it bypasses Row Level Security
-- [ ] Keep both values handy — needed in Phase 4 (runtime secrets) and Phase 6 (build-time env vars).
+- [x] Keep both values handy — needed in Phase 4 (runtime secrets) and Phase 6 (build-time env vars).
 
 #### Option B — Local Supabase (offline / integration dev only)
 
@@ -114,27 +135,36 @@ File: `wrangler.jsonc`
 ## Phase 4 — Set Cloudflare secrets
 > **Goal:** Inject `SUPABASE_URL` and `SUPABASE_KEY` into the Workers secret store. Never in any config file.
 
-- [ ] Authenticate wrangler (one-time per machine):
+- [x] Authenticate wrangler (one-time per machine):
   ```bash
   npx wrangler login
   ```
-- [ ] Set production secrets (wrangler prompts for value, not echoed):
+- [x] Set production secrets (wrangler prompts for value, not echoed):
   ```bash
   npx wrangler secret put SUPABASE_URL
   npx wrangler secret put SUPABASE_KEY
   ```
-- [ ] Verify registration (values are not shown):
+- [x] Verify registration (values are not shown):
   ```bash
   npx wrangler secret list
   ```
   Expected: JSON array with both `SUPABASE_URL` and `SUPABASE_KEY`.
-- [ ] Set preview secrets:
+- [ ] Set preview secrets (skip if not using preview env):
   ```bash
   npx wrangler secret put SUPABASE_URL --env preview
   npx wrangler secret put SUPABASE_KEY --env preview
   ```
 
-**Edge case — first deploy vs. secrets:** If `wrangler secret put` errors about a missing worker, run the first `wrangler deploy` first (the worker boots without secrets due to `optional: true`), then set secrets.
+**Edge case — non-interactive secret injection:** When running in a script or agent context, pipe the value instead of typing interactively:
+```bash
+echo "https://xyz.supabase.co" | npx wrangler secret put SUPABASE_URL
+echo "eyJ..." | npx wrangler secret put SUPABASE_KEY
+```
+
+**Edge case — first deploy vs. secrets:** If `wrangler secret put` errors about a missing worker, build and deploy first, then set secrets and redeploy:
+```bash
+npm run build && npx wrangler deploy --config dist/server/wrangler.json
+```
 
 **Edge case — key rotation:** Re-running `wrangler secret put` overwrites the value silently. Do a redeploy after rotation to be safe.
 
@@ -143,21 +173,21 @@ File: `wrangler.jsonc`
 ## Phase 5 — Local dev verification (workerd runtime)
 > **Goal:** Confirm the app works under the actual Workers runtime before deploying.
 
-- [ ] Copy and fill example vars:
+- [x] Copy and fill example vars:
   ```bash
   cp .dev.vars.example .dev.vars
   # edit .dev.vars with real Supabase values
   ```
-- [ ] Run dev server with workerd:
+- [x] Run dev server with workerd:
   ```bash
   npx wrangler dev
   ```
-- [ ] Verify in browser at `http://localhost:8787`:
-  - [ ] Home page loads without errors
-  - [ ] `/auth/signin` renders
-  - [ ] Sign in with a valid Supabase user → session cookie set → redirect to `/dashboard`
-  - [ ] `/dashboard` without session → redirects to `/auth/signin`
-  - [ ] Sign out → session cleared
+- [x] Verify in browser at `http://localhost:8787`:
+  - [x] Home page loads without errors
+  - [x] `/auth/signin` renders
+  - [x] Sign in with a valid Supabase user → session cookie set → redirect to `/dashboard`
+  - [x] `/dashboard` without session → redirects to `/auth/signin`
+  - [x] Sign out → session cleared
 
 **Edge case — `astro dev` vs `wrangler dev`:** `npm run dev` uses Node.js, not workerd. It will not surface `nodejs_compat` issues. Always use `wrangler dev` for pre-deploy smoke testing.
 
@@ -168,24 +198,25 @@ File: `wrangler.jsonc`
 ## Phase 6 — Cloudflare Git integration (auto-deploy on push)
 > **Goal:** Connect the GitHub repo to Cloudflare so every push to `main` triggers a build + deploy automatically — no GHA deploy step needed.
 
-- [ ] In the Cloudflare dashboard, go to **Workers & Pages → 10xcards → Settings → Build**.
-- [ ] Click **Connect to Git** and authorize the GitHub app for this repository.
-- [ ] Set the branch to deploy from: `main`.
-- [ ] Set the **build command**: `npm run build`
-- [ ] Set the **deploy command**: `npx wrangler deploy` (Cloudflare may pre-fill this).
-- [ ] Set **Node.js version** to `22` in the environment variables section of the build config.
-- [ ] Add build-time environment variables (same as GitHub secrets):
+- [x] **Prereq:** repo must already exist on GitHub and have code pushed (see Phase 0b).
+- [x] In the Cloudflare dashboard, go to **Workers & Pages → 10xcards → Settings → Build**.
+- [x] Click **Connect to Git** and authorize the GitHub app for this repository.
+- [x] Set the branch to deploy from: `main`.
+- [x] Set the **build command**: `npm run build`
+- [x] Set the **deploy command**: `npx wrangler deploy --config dist/server/wrangler.json`
+- [x] Set **Node.js version** to `22` in the environment variables section of the build config.
+- [x] Add build-time environment variables (same as GitHub secrets):
   - `SUPABASE_URL` — your Supabase project URL
   - `SUPABASE_KEY` — anon public key (NOT service role key)
-- [ ] Save and trigger a first deploy manually from the dashboard to confirm the pipeline works.
-- [ ] Verify the worker URL is live:
+- [x] Save and trigger a first deploy manually from the dashboard to confirm the pipeline works.
+- [x] Verify the worker URL is live:
   ```
   https://10xcards.<account>.workers.dev
   ```
 
-**Edge case — build env vars vs. runtime secrets:** Cloudflare's build environment is separate from the Worker runtime. `SUPABASE_URL` and `SUPABASE_KEY` must be added in two places: (1) as build-time env vars in the Git integration settings (so `astro build` can resolve `astro:env/server`), and (2) as runtime secrets via `wrangler secret put` (Phase 4) so the deployed Worker can access them at request time. Both are required.
+**Edge case — deploy command uses generated config:** `@astrojs/cloudflare` generates `dist/server/wrangler.json` after `npm run build`. This file contains the correct `main`, `assets`, and binding definitions for the built worker. The root `wrangler.jsonc` has `"main": "@astrojs/cloudflare/entrypoints/server"` which is a pre-build path only valid for `wrangler dev`. Always use `--config dist/server/wrangler.json` for the deploy command — using the root config will cause a `TypeError: Callback returned incorrect type` error.
 
-**Edge case — wrangler.jsonc `main` entrypoint:** Cloudflare's Git integration reads `wrangler.jsonc` for Worker config. The `"main": "@astrojs/cloudflare/entrypoints/server"` entry tells Cloudflare where the Worker entry point is after build. No additional config is needed in the dashboard for this.
+**Edge case — build env vars vs. runtime secrets:** Cloudflare's build environment is separate from the Worker runtime. `SUPABASE_URL` and `SUPABASE_KEY` must be added in two places: (1) as build-time env vars in the Git integration settings (so `astro build` can resolve `astro:env/server`), and (2) as runtime secrets via `wrangler secret put` (Phase 4) so the deployed Worker can access them at request time. Both are required.
 
 **Edge case — first deploy vs. secrets ordering:** Set runtime secrets (Phase 4) before triggering the first Git integration deploy. If secrets are missing at first deploy, the Worker will boot but Supabase will be disabled. Set secrets then redeploy from the dashboard.
 
@@ -195,11 +226,11 @@ File: `wrangler.jsonc`
 > **Goal:** Confirm the live deployment is healthy and document rollback / log procedures.
 
 ### Smoke tests
-- [ ] `https://10xcards.<account>.workers.dev/` — home page loads
-- [ ] `/auth/signin` — form renders, no console errors
-- [ ] Sign in with valid user → redirect to `/dashboard`
-- [ ] `/dashboard` without session → redirect to `/auth/signin`
-- [ ] Sign out → session cleared
+- [x] `https://10xcards.<account>.workers.dev/` — home page loads
+- [x] `/auth/signin` — form renders, no console errors
+- [x] Sign in with valid user → redirect to `/dashboard`
+- [x] `/dashboard` without session → redirect to `/auth/signin`
+- [x] Sign out → session cleared
 
 ### Live logs
 ```bash
