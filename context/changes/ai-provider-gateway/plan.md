@@ -276,29 +276,29 @@ None — no data or schema changes. Rollback: revert the commit; the secret can 
 
 #### Automated
 
-- [x] 1.1 Lint passes: `npm run lint`
-- [x] 1.2 Production build passes: `npm run build`
-- [x] 1.3 No prompt/message content is logged in ai-client.ts
+- [x] 1.1 Lint passes: `npm run lint` — 67e5e9f
+- [x] 1.2 Production build passes: `npm run build` — 67e5e9f
+- [x] 1.3 No prompt/message content is logged in ai-client.ts — 67e5e9f
 
 #### Manual
 
-- [x] 1.4 Chosen model id and ZDR-confirmation date recorded
-- [x] 1.5 OpenRouter account prompt logging off and account-level ZDR enabled
-- [x] 1.6 Production secret OPENROUTER_API_KEY set before pushing to main
+- [x] 1.4 Chosen model id and ZDR-confirmation date recorded — 67e5e9f
+- [x] 1.5 OpenRouter account prompt logging off and account-level ZDR enabled — 67e5e9f
+- [x] 1.6 Production secret OPENROUTER_API_KEY set before pushing to main — 67e5e9f
 
 ### Phase 2: Auth-only smoke route
 
 #### Automated
 
-- [ ] 2.1 Lint passes: `npm run lint`
-- [ ] 2.2 Production build passes: `npm run build`
+- [x] 2.1 Lint passes: `npm run lint`
+- [x] 2.2 Production build passes: `npm run build`
 
 #### Manual
 
-- [ ] 2.3 wrangler dev: anonymous POST returns 401
-- [ ] 2.4 wrangler dev: logged-in POST returns 200 with model and latencyMs
-- [ ] 2.5 wrangler dev: missing key returns 503 config without outbound call
-- [ ] 2.6 wrangler dev console contains no prompt text
+- [x] 2.3 wrangler dev: anonymous POST returns 401
+- [x] 2.4 wrangler dev: logged-in POST returns 200 with model and latencyMs
+- [x] 2.5 wrangler dev: missing key returns 503 config without outbound call
+- [x] 2.6 wrangler dev console contains no prompt text
 
 ### Phase 3: Production rollout and evidence
 
