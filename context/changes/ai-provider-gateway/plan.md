@@ -290,27 +290,27 @@ None — no data or schema changes. Rollback: revert the commit; the secret can 
 
 #### Automated
 
-- [x] 2.1 Lint passes: `npm run lint`
-- [x] 2.2 Production build passes: `npm run build`
+- [x] 2.1 Lint passes: `npm run lint` — 214169a
+- [x] 2.2 Production build passes: `npm run build` — 214169a
 
 #### Manual
 
-- [x] 2.3 wrangler dev: anonymous POST returns 401
-- [x] 2.4 wrangler dev: logged-in POST returns 200 with model and latencyMs
-- [x] 2.5 wrangler dev: missing key returns 503 config without outbound call
-- [x] 2.6 wrangler dev console contains no prompt text
+- [x] 2.3 wrangler dev: anonymous POST returns 401 — 214169a
+- [x] 2.4 wrangler dev: logged-in POST returns 200 with model and latencyMs — 214169a
+- [x] 2.5 wrangler dev: missing key returns 503 config without outbound call — 214169a
+- [x] 2.6 wrangler dev console contains no prompt text — 214169a
 
 ### Phase 3: Production rollout and evidence
 
 #### Automated
 
-- [ ] 3.1 `wrangler secret list` includes OPENROUTER_API_KEY
-- [ ] 3.2 Production anonymous POST returns 401
+- [x] 3.1 `wrangler secret list` includes OPENROUTER_API_KEY
+- [x] 3.2 Production anonymous POST returns 401
 
 #### Manual
 
-- [ ] 3.3 Production logged-in POST returns 200 with model and latencyMs
-- [ ] 3.4 Production cpuTime ≤ 10 ms recorded
-- [ ] 3.5 Production logs contain no prompt text
-- [ ] 3.6 OpenRouter activity shows ZDR endpoint served the request
-- [ ] 3.7 Measured CPU note appended to infrastructure.md risk row
+- [x] 3.3 Production logged-in POST returns 200 with model and latencyMs
+- [x] 3.4 Production cpuTime ≤ 10 ms recorded
+- [x] 3.5 Production logs contain no prompt text
+- [x] 3.6 OpenRouter activity shows ZDR endpoint served the request
+- [x] 3.7 Measured CPU note appended to infrastructure.md risk row
