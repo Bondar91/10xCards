@@ -315,15 +315,15 @@ No database changes. Existing production accounts (if any were created with the 
 
 #### Automated
 
-- [x] 3.1 Production build passes: `npm run build`
-- [x] 3.2 Production /dashboard returns 302 for anonymous curl
+- [x] 3.1 Production build passes: `npm run build` — 2d1e9bc
+- [x] 3.2 Production /dashboard returns 302 for anonymous curl — 2d1e9bc
 
 #### Manual
 
-- [x] 3.3 Supabase URL config, confirm-email setting and Polish template set
-- [x] 3.4 Production: cross-device email confirmation lands signed in on /dashboard
-- [x] 3.5 Production: unconfirmed sign-in shows state page and resend delivers a link
-- [x] 3.6 Production: reused link shows expired state
-- [x] 3.7 Production: sign-in to /dashboard and sign-out to / with protection restored
-- [x] 3.8 Production: anonymous /dashboard returns to /dashboard after login via next
-- [x] 3.9 wrangler tail clean; CPU times recorded in change.md Evidence
+- [x] 3.3 Supabase URL config, confirm-email setting and Polish template set — 2d1e9bc
+- [x] 3.4 Production: cross-device email confirmation lands signed in on /dashboard — 2d1e9bc
+- [x] 3.5 Production: unconfirmed sign-in shows state page and resend delivers a link — 2d1e9bc
+- [x] 3.6 Production: reused link shows expired state — 2d1e9bc
+- [x] 3.7 Production: sign-in to /dashboard and sign-out to / with protection restored — 2d1e9bc
+- [x] 3.8 Production: anonymous /dashboard returns to /dashboard after login via next — 2d1e9bc
+- [x] 3.9 wrangler tail clean; CPU times recorded in change.md Evidence — 2d1e9bc
