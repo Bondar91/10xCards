@@ -1,7 +1,7 @@
 ---
 change_id: ai-provider-gateway
 title: AI provider gateway — server-side LLM call on production with no text retention
-status: implementing
+status: implemented
 created: 2026-10-29
 updated: 2026-10-29
 archived_at: null

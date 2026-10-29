@@ -304,13 +304,13 @@ None — no data or schema changes. Rollback: revert the commit; the secret can 
 
 #### Automated
 
-- [x] 3.1 `wrangler secret list` includes OPENROUTER_API_KEY
-- [x] 3.2 Production anonymous POST returns 401
+- [x] 3.1 `wrangler secret list` includes OPENROUTER_API_KEY — 826a51d
+- [x] 3.2 Production anonymous POST returns 401 — 826a51d
 
 #### Manual
 
-- [x] 3.3 Production logged-in POST returns 200 with model and latencyMs
-- [x] 3.4 Production cpuTime ≤ 10 ms recorded
-- [x] 3.5 Production logs contain no prompt text
-- [x] 3.6 OpenRouter activity shows ZDR endpoint served the request
-- [x] 3.7 Measured CPU note appended to infrastructure.md risk row
+- [x] 3.3 Production logged-in POST returns 200 with model and latencyMs — 826a51d
+- [x] 3.4 Production cpuTime ≤ 10 ms recorded — 826a51d
+- [x] 3.5 Production logs contain no prompt text — 826a51d
+- [x] 3.6 OpenRouter activity shows ZDR endpoint served the request — 826a51d
+- [x] 3.7 Measured CPU note appended to infrastructure.md risk row — 826a51d
