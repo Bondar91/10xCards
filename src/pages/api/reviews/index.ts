@@ -72,8 +72,15 @@ export const POST: APIRoute = async (context) => {
 
   const now = new Date();
   let result: ReturnType<typeof rateCard>;
+  let response: SubmitReviewResponse;
   try {
     result = rateCard(row, rating, now);
+    // Computed before the write so nothing can throw after the rating is committed.
+    response = {
+      reps: result.card.reps,
+      intervals: intervalLabels(cardToRow(result.card), now),
+      requeue: shouldRequeue(result.card, now),
+    };
   } catch (e) {
     // FSRSValidationError is not exported from ts-fsrs v5 — treat any throw as 500.
     // eslint-disable-next-line no-console
@@ -108,12 +115,5 @@ export const POST: APIRoute = async (context) => {
     }
   }
 
-  return json(
-    {
-      reps: card.reps,
-      intervals: intervalLabels(cardToRow(card), now),
-      requeue: shouldRequeue(card, now),
-    } satisfies SubmitReviewResponse,
-    200,
-  );
+  return json(response, 200);
 };

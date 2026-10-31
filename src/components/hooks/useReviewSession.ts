@@ -1,6 +1,11 @@
 import { useEffect, useRef, useState } from "react";
+import {
+  postJson,
+  requestJson,
+  type RequestResult,
+  type StatusMessages,
+} from "@/lib/request-json";
 import type {
-  ApiError,
   ReviewCardDto,
   ReviewQueueResponse,
   ReviewRating,
@@ -18,60 +23,15 @@ export type ReviewStep =
   | "error";
 
 // 409 (stale rating) is handled silently and never shown.
-const STATUS_MESSAGES: Partial<Record<number, string>> = {
+const STATUS_MESSAGES: StatusMessages = {
   400: "Nieprawidłowa ocena. Spróbuj ponownie.",
   401: "Sesja wygasła. Zaloguj się ponownie.",
   404: "Nie znaleziono fiszki.",
   503: "Baza danych jest chwilowo niedostępna. Spróbuj za chwilę.",
 };
 
-const FALLBACK_MESSAGE = "Coś poszło nie tak. Spróbuj ponownie.";
-const NETWORK_MESSAGE =
-  "Brak połączenia z serwerem. Sprawdź internet i spróbuj ponownie.";
-
-type RequestResult<T> =
-  | { ok: true; data: T }
-  | { ok: false; status: number; message: string };
-
-async function requestJson<T>(
-  url: string,
-  init?: RequestInit,
-): Promise<RequestResult<T>> {
-  let response: Response;
-  try {
-    response = await fetch(url, init);
-  } catch {
-    return { ok: false, status: 0, message: NETWORK_MESSAGE };
-  }
-
-  const payload = (await response.json().catch(() => null)) as
-    | T
-    | ApiError
-    | null;
-  if (response.ok && payload) {
-    return { ok: true, data: payload as T };
-  }
-
-  const serverMessage =
-    payload && typeof payload === "object" && "error" in payload
-      ? payload.error
-      : null;
-  return {
-    ok: false,
-    status: response.status,
-    message:
-      serverMessage ?? STATUS_MESSAGES[response.status] ?? FALLBACK_MESSAGE,
-  };
-}
-
-const postJson = <T>(url: string, body: unknown) =>
-  requestJson<T>(url, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body),
-  });
-
-const fetchQueue = () => requestJson<ReviewQueueResponse>("/api/reviews/queue");
+const fetchQueue = () =>
+  requestJson<ReviewQueueResponse>("/api/reviews/queue", STATUS_MESSAGES);
 
 export function useReviewSession() {
   const [step, setStep] = useState<ReviewStep>("loading");
@@ -131,7 +91,11 @@ export function useReviewSession() {
       rating,
       expectedReps: card.reps,
     };
-    const result = await postJson<SubmitReviewResponse>("/api/reviews", body);
+    const result = await postJson<SubmitReviewResponse>(
+      "/api/reviews",
+      body,
+      STATUS_MESSAGES,
+    );
 
     submittingRef.current = false;
     setPendingRating(null);
@@ -162,6 +126,8 @@ export function useReviewSession() {
     current: queue.at(0) ?? null,
     queueLength: queue.length,
     ratedCount,
+    // Estimate from the batch's queue response: ignores ratings made in other tabs and
+    // cards that became due mid-session; "Kontynuuj" re-fetches and handles an empty result.
     remaining: Math.max(dueTotal - batchSize, 0),
     nextDueAt,
     error,

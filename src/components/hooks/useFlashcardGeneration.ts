@@ -1,6 +1,6 @@
 import { useState } from "react";
+import { postJson, type StatusMessages } from "@/lib/request-json";
 import type {
-  ApiError,
   FlashcardProposal,
   GenerateResponse,
   SaveGenerationRequest,
@@ -28,7 +28,7 @@ export const isEdited = (card: ReviewCard) =>
   card.front.trim() !== card.original.front ||
   card.back.trim() !== card.original.back;
 
-const STATUS_MESSAGES: Partial<Record<number, string>> = {
+const STATUS_MESSAGES: StatusMessages = {
   400: "Nieprawidłowe dane. Sprawdź tekst i spróbuj ponownie.",
   401: "Sesja wygasła. Zaloguj się ponownie.",
   404: "Nie znaleziono generowania. Wygeneruj fiszki ponownie.",
@@ -37,46 +37,6 @@ const STATUS_MESSAGES: Partial<Record<number, string>> = {
   503: "Usługa AI jest chwilowo niedostępna. Spróbuj za chwilę.",
   504: "Generowanie trwało zbyt długo. Spróbuj ponownie lub skróć tekst.",
 };
-
-const FALLBACK_MESSAGE = "Coś poszło nie tak. Spróbuj ponownie.";
-const NETWORK_MESSAGE =
-  "Brak połączenia z serwerem. Sprawdź internet i spróbuj ponownie.";
-
-type PostResult<T> =
-  | { ok: true; data: T }
-  | { ok: false; status: number; message: string };
-
-async function postJson<T>(url: string, body: unknown): Promise<PostResult<T>> {
-  let response: Response;
-  try {
-    response = await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-    });
-  } catch {
-    return { ok: false, status: 0, message: NETWORK_MESSAGE };
-  }
-
-  const payload = (await response.json().catch(() => null)) as
-    | T
-    | ApiError
-    | null;
-  if (response.ok && payload) {
-    return { ok: true, data: payload as T };
-  }
-
-  const serverMessage =
-    payload && typeof payload === "object" && "error" in payload
-      ? payload.error
-      : null;
-  return {
-    ok: false,
-    status: response.status,
-    message:
-      serverMessage ?? STATUS_MESSAGES[response.status] ?? FALLBACK_MESSAGE,
-  };
-}
 
 export function useFlashcardGeneration() {
   const [step, setStep] = useState<GenerationStep>("input");
@@ -94,9 +54,11 @@ export function useFlashcardGeneration() {
     setError(null);
     setStep("generating");
 
-    const result = await postJson<GenerateResponse>("/api/generations", {
-      text,
-    });
+    const result = await postJson<GenerateResponse>(
+      "/api/generations",
+      { text },
+      STATUS_MESSAGES,
+    );
     if (!result.ok) {
       setError(result.message);
       setStep("input");
@@ -163,6 +125,7 @@ export function useFlashcardGeneration() {
     const result = await postJson<SaveGenerationResponse>(
       `/api/generations/${generationId}/save`,
       body,
+      STATUS_MESSAGES,
     );
 
     if (result.ok) {

@@ -53,7 +53,8 @@ export const GET: APIRoute = async (context) => {
       .from("flashcards")
       .select("due")
       .eq("user_id", user.id)
-      .gt("due", now.toISOString())
+      // No `due > now` filter: the queue used the DB clock, so with an empty queue the
+      // earliest due card is the next one (avoids Worker/DB clock-gap misses).
       .order("due", { ascending: true })
       .limit(1)
       .maybeSingle();
