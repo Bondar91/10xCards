@@ -43,30 +43,60 @@ export type Database = {
         Row: {
           back: string
           created_at: string
+          difficulty: number
+          due: string
+          elapsed_days: number
           front: string
           generation_id: string | null
           id: string
+          lapses: number
+          last_review: string | null
+          learning_steps: number
+          reps: number
+          scheduled_days: number
           source: string
+          stability: number
+          state: number
           updated_at: string
           user_id: string
         }
         Insert: {
           back: string
           created_at?: string
+          difficulty?: number
+          due?: string
+          elapsed_days?: number
           front: string
           generation_id?: string | null
           id?: string
+          lapses?: number
+          last_review?: string | null
+          learning_steps?: number
+          reps?: number
+          scheduled_days?: number
           source: string
+          stability?: number
+          state?: number
           updated_at?: string
           user_id?: string
         }
         Update: {
           back?: string
           created_at?: string
+          difficulty?: number
+          due?: string
+          elapsed_days?: number
           front?: string
           generation_id?: string | null
           id?: string
+          lapses?: number
+          last_review?: string | null
+          learning_steps?: number
+          reps?: number
+          scheduled_days?: number
           source?: string
+          stability?: number
+          state?: number
           updated_at?: string
           user_id?: string
         }
@@ -116,11 +146,98 @@ export type Database = {
         }
         Relationships: []
       }
+      review_logs: {
+        Row: {
+          difficulty: number
+          due: string
+          flashcard_id: string
+          id: string
+          learning_steps: number
+          rating: number
+          review: string
+          scheduled_days: number
+          stability: number
+          state: number
+          user_id: string
+        }
+        Insert: {
+          difficulty: number
+          due: string
+          flashcard_id: string
+          id?: string
+          learning_steps: number
+          rating: number
+          review: string
+          scheduled_days: number
+          stability: number
+          state: number
+          user_id: string
+        }
+        Update: {
+          difficulty?: number
+          due?: string
+          flashcard_id?: string
+          id?: string
+          learning_steps?: number
+          rating?: number
+          review?: string
+          scheduled_days?: number
+          stability?: number
+          state?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "review_logs_flashcard_id_fkey"
+            columns: ["flashcard_id"]
+            isOneToOne: false
+            referencedRelation: "flashcards"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
+      get_review_queue: {
+        Args: { p_limit: number }
+        Returns: {
+          back: string
+          difficulty: number
+          due: string
+          due_total: number
+          elapsed_days: number
+          front: string
+          id: string
+          lapses: number
+          last_review: string
+          learning_steps: number
+          reps: number
+          scheduled_days: number
+          stability: number
+          state: number
+        }[]
+      }
+      review_flashcard: {
+        Args: {
+          p_difficulty: number
+          p_due: string
+          p_elapsed_days: number
+          p_expected_reps: number
+          p_flashcard_id: string
+          p_lapses: number
+          p_last_review: string
+          p_learning_steps: number
+          p_log: Json
+          p_reps: number
+          p_scheduled_days: number
+          p_stability: number
+          p_state: number
+        }
+        Returns: undefined
+      }
       save_generation: {
         Args: { p_cards: Json; p_generation_id: string }
         Returns: number
