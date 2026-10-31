@@ -65,6 +65,8 @@ export async function chatCompletion(
         model: OPENROUTER_MODEL,
         messages,
         max_tokens: options.maxTokens,
+        // Never spend latency on hidden reasoning; ignored by non-reasoning models.
+        reasoning: { enabled: false },
         provider: PRIVACY_ROUTING,
       }),
       signal: controller.signal,

@@ -355,26 +355,26 @@ Deploy, verify isolation and privacy on production, and measure the real CPU/wal
 
 #### Automated
 
-- [x] 3.1 `npm run build` passes
-- [x] 3.2 Changed TS/TSX files lint clean
+- [x] 3.1 `npm run build` passes — bddc7f3
+- [x] 3.2 Changed TS/TSX files lint clean — bddc7f3
 
 #### Manual
 
-- [x] 3.3 wrangler dev: full flow paste → progress → review → save → success; dashboard count increases
-- [x] 3.4 Accept remaining keeps rejected and edited cards as decided; DB matches
-- [x] 3.5 Edit restored to original saves as unedited
-- [x] 3.6 All rejected records 0 accepted and inserts no flashcards
-- [x] 3.7 AI error shows Polish message and keeps pasted text
-- [x] 3.8 Anonymous /generate redirects to sign-in and returns after login
-- [x] 3.9 Polish UI; works in latest Chrome, Firefox and Safari
+- [x] 3.3 wrangler dev: full flow paste → progress → review → save → success; dashboard count increases — bddc7f3
+- [x] 3.4 Accept remaining keeps rejected and edited cards as decided; DB matches — bddc7f3
+- [x] 3.5 Edit restored to original saves as unedited — bddc7f3
+- [x] 3.6 All rejected records 0 accepted and inserts no flashcards — bddc7f3
+- [x] 3.7 AI error shows Polish message and keeps pasted text — bddc7f3
+- [x] 3.8 Anonymous /generate redirects to sign-in and returns after login — bddc7f3
+- [x] 3.9 Polish UI; works in latest Chrome, Firefox and Safari — bddc7f3
 
 ### Phase 4: Production rollout and evidence
 
 #### Automated
 
-- [ ] 4.1 `npm run build` passes on merged main
-- [ ] 4.2 Production anonymous POST /api/generations returns 401
-- [ ] 4.3 Production POST /api/ai/health returns 404
+- [x] 4.1 `npm run build` passes on merged main
+- [x] 4.2 Production anonymous POST /api/generations returns 401
+- [x] 4.3 Production POST /api/ai/health returns 404
 
 #### Manual
 

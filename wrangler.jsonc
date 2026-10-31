@@ -19,8 +19,9 @@
   // NON-SECRET runtime config only. Secrets (SUPABASE_URL, SUPABASE_KEY, OPENROUTER_API_KEY) must NOT appear here.
   // Use `wrangler secret put` for production secrets; `.dev.vars` for local dev.
   "vars": {
-    // Must have a Zero Data Retention endpoint on OpenRouter and be a non-reasoning model.
-    "OPENROUTER_MODEL": "mistralai/mistral-small-3.2-24b-instruct",
+    // Must have a Zero Data Retention endpoint on OpenRouter. Reasoning is disabled per request in ai-client.ts
+    // (Xing4.0 reasons for ~25 s otherwise). Free tier: shared upstream pool, ~50 req/day at zero credits.
+    "OPENROUTER_MODEL": "xingchen-agi/xing4.0-29b-a4b:free",
   },
   // Preview environment — deployed with `wrangler deploy --env preview`
   // Secrets for this env must be set separately (they do NOT inherit from production):
@@ -31,7 +32,7 @@
     "preview": {
       "name": "10xcards-preview",
       "vars": {
-        "OPENROUTER_MODEL": "mistralai/mistral-small-3.2-24b-instruct",
+        "OPENROUTER_MODEL": "xingchen-agi/xing4.0-29b-a4b:free",
       },
     },
   },
