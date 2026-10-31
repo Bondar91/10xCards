@@ -28,6 +28,11 @@ export const GET: APIRoute = async (context) => {
   const { error } = await supabase.auth.verifyOtp(parsed.data);
 
   if (error) {
+    // Expired/used links are expected; anything else is an outage worth seeing in wrangler tail.
+    if (error.code !== "otp_expired") {
+      // eslint-disable-next-line no-console
+      console.error("verifyOtp failed", error.code ?? error.status);
+    }
     return expired();
   }
 

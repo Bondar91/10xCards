@@ -2,11 +2,9 @@ import type { APIRoute } from "astro";
 import { z } from "astro/zod";
 import { createClient } from "@/lib/supabase";
 import { authErrorMessage } from "@/lib/auth-errors";
+import { MIN_PASSWORD_LENGTH } from "@/lib/auth-rules";
 
 export const prerender = false;
-
-// Matches MIN_PASSWORD_LENGTH in SignUpForm.tsx.
-const MIN_PASSWORD_LENGTH = 6;
 
 const SignUpSchema = z.object({
   email: z.email(),

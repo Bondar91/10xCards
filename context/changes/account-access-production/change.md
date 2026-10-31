@@ -1,15 +1,18 @@
 ---
 change_id: account-access-production
 title: Account access production
-status: implemented
+status: impl_reviewed
 created: 2026-10-29
-updated: 2026-10-29
+updated: 2026-10-31
 archived_at: null
 ---
 
 ## Notes
 
 <!-- Free-form notes for this change: links, ad-hoc context, decisions that don't belong in research/frame/plan. -->
+
+- Commit `2d1e9bc` also updated `context/changes/deployment/deployment-plan.md` beyond the planned Phase 7 ticks: added section "0b — GitHub repository setup", renumbered Supabase setup to 0c, and ticked the already-completed Phases 0–6 (catch-up of earlier deployment work).
+- Progress 1.1 / 2.1 "lint clean" covers TS/TSX only: ESLint reports a pre-existing `prettier/prettier` "Parsing error" on every `.astro` file (baseline `0771421`: 56 errors; HEAD: 21, none in changed TS/TSX). `.astro` files are effectively unlinted until the ESLint/Astro config is fixed in a separate change (see `follow-ups/review-fixes.md`).
 
 ## Evidence
 
