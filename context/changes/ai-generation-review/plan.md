@@ -378,9 +378,9 @@ Deploy, verify isolation and privacy on production, and measure the real CPU/wal
 
 #### Manual
 
-- [ ] 4.4 Production full flow with ~3,000-char text
-- [ ] 4.5 Production 10,000-char input completes; CPU and wall time recorded
-- [ ] 4.6 Two-account isolation verified on production
-- [ ] 4.7 No input or card text in wrangler tail; generations holds no text
-- [ ] 4.8 Test-account rows cleaned up or excluded
-- [ ] 4.9 Acceptance ratio query recorded once
+- [x] 4.4 Production full flow with ~3,000-char text
+- [x] 4.5 Production 10,000-char input completes; CPU and wall time recorded
+- [x] 4.6 Two-account isolation verified on production
+- [x] 4.7 No input or card text in wrangler tail; generations holds no text
+- [x] 4.8 Test-account rows cleaned up or excluded
+- [x] 4.9 Acceptance ratio query recorded once
