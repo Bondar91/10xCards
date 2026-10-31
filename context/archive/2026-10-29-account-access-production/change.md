@@ -1,10 +1,10 @@
 ---
 change_id: account-access-production
 title: Account access production
-status: impl_reviewed
+status: archived
 created: 2026-10-29
 updated: 2026-10-31
-archived_at: null
+archived_at: 2026-10-31T15:44:14Z
 ---
 
 ## Notes
