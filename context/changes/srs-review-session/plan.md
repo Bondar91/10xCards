@@ -372,29 +372,29 @@ FSRS math is a few floating-point operations per card; the queue route computes 
 
 #### Automated
 
-- [x] 3.1 `npm run build` passes
-- [x] 3.2 `npm test` passes
-- [x] 3.3 eslint on hook and review components passes
+- [x] 3.1 `npm run build` passes — f5210f1
+- [x] 3.2 `npm test` passes — f5210f1
+- [x] 3.3 eslint on hook and review components passes — f5210f1
 
 #### Manual
 
-- [x] 3.4 Dashboard shows due count and links to `/review`
-- [x] 3.5 Full flow works; "Nie pamiętam" card reappears in the same session (immediately when last); end screen shown
-- [x] 3.6 "Kontynuuj" loads next batch; ties reshuffle on refresh
-- [x] 3.7 Double-click records one review
-- [x] 3.8 Keyboard shortcuts and cross-browser layout work
-- [x] 3.9 Empty state shows next due date
+- [x] 3.4 Dashboard shows due count and links to `/review` — f5210f1
+- [x] 3.5 Full flow works; "Nie pamiętam" card reappears in the same session (immediately when last); end screen shown — f5210f1
+- [x] 3.6 "Kontynuuj" loads next batch; ties reshuffle on refresh — f5210f1
+- [x] 3.7 Double-click records one review — f5210f1
+- [x] 3.8 Keyboard shortcuts and cross-browser layout work — f5210f1
+- [x] 3.9 Empty state shows next due date — f5210f1
 
 ### Phase 4: Production rollout & evidence
 
 #### Automated
 
-- [ ] 4.1 `npm run build` passes on merged `main`
-- [ ] 4.2 `npm test` passes on merged `main`
+- [x] 4.1 `npm run build` passes on merged `main`
+- [x] 4.2 `npm test` passes on merged `main`
 
 #### Manual
 
-- [ ] 4.3 Production two-account isolation verified
-- [ ] 4.4 `cpuTime` for review routes recorded within limit
-- [ ] 4.5 "Dobrze" card leaves the queue; due count drops; scheduled at labelled interval
-- [ ] 4.6 No regressions in `/generate` save; new cards appear as New
+- [x] 4.3 Production two-account isolation verified
+- [x] 4.4 `cpuTime` for review routes recorded within limit
+- [x] 4.5 "Dobrze" card leaves the queue; due count drops; scheduled at labelled interval
+- [x] 4.6 No regressions in `/generate` save; new cards appear as New
