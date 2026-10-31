@@ -6,10 +6,18 @@ const { user } = Astro.locals;
 
 // Count failure renders the page without the number (no page error).
 let flashcardCount: number | null = null;
+let dueCount: number | null = null;
 const supabase = createClient(Astro.request.headers, Astro.cookies);
 if (supabase) {
-  const { count, error } = await supabase.from("flashcards").select("*", { count: "exact", head: true });
-  if (!error) flashcardCount = count;
+  const [all, due] = await Promise.all([
+    supabase.from("flashcards").select("*", { count: "exact", head: true }),
+    supabase
+      .from("flashcards")
+      .select("*", { count: "exact", head: true })
+      .lte("due", new Date().toISOString()),
+  ]);
+  if (!all.error) flashcardCount = all.count;
+  if (!due.error) dueCount = due.count;
 }
 ---
 
@@ -29,12 +37,31 @@ if (supabase) {
           </p>
         )
       }
-      <a
-        href="/generate"
-        class="mt-6 inline-block rounded-lg bg-purple-600 px-5 py-2.5 font-medium text-white transition-colors hover:bg-purple-500"
-      >
-        Generuj fiszki
-      </a>
+      {
+        dueCount !== null && (
+          <p class="mt-2 text-blue-100/80">
+            Do powtórki: <span class="text-2xl font-semibold text-white">{dueCount}</span>
+          </p>
+        )
+      }
+      <div class="mt-6 flex flex-wrap justify-center gap-3">
+        {
+          flashcardCount !== 0 && (
+            <a
+              href="/review"
+              class="inline-block rounded-lg bg-emerald-600 px-5 py-2.5 font-medium text-white transition-colors hover:bg-emerald-500"
+            >
+              Rozpocznij powtórki
+            </a>
+          )
+        }
+        <a
+          href="/generate"
+          class="inline-block rounded-lg bg-purple-600 px-5 py-2.5 font-medium text-white transition-colors hover:bg-purple-500"
+        >
+          Generuj fiszki
+        </a>
+      </div>
       <form method="POST" action="/api/auth/signout" class="mt-6">
         <button
           type="submit"

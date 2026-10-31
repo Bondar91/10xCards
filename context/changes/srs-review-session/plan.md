@@ -356,34 +356,34 @@ FSRS math is a few floating-point operations per card; the queue route computes 
 
 #### Automated
 
-- [x] 2.1 `npm run build` passes
-- [x] 2.2 `npm test` passes
-- [x] 2.3 eslint on review routes and types passes
+- [x] 2.1 `npm run build` passes — c61e152
+- [x] 2.2 `npm test` passes — c61e152
+- [x] 2.3 eslint on review routes and types passes — c61e152
 
 #### Manual
 
-- [x] 2.4 wrangler dev: anonymous queue and rating requests return 401
-- [x] 2.5 wrangler dev: queue returns ≤ 20 own cards with interval labels; ts-fsrs runs in workerd
-- [x] 2.6 wrangler dev: Again → requeue true; Good on review card → requeue false; log row written
-- [x] 2.7 wrangler dev: stale expectedReps → 409, no second log row
-- [x] 2.8 wrangler dev: invalid rating / id → 400; foreign card → 404
+- [x] 2.4 wrangler dev: anonymous queue and rating requests return 401 — c61e152
+- [x] 2.5 wrangler dev: queue returns ≤ 20 own cards with interval labels; ts-fsrs runs in workerd — c61e152
+- [x] 2.6 wrangler dev: Again → requeue true; Good on review card → requeue false; log row written — c61e152
+- [x] 2.7 wrangler dev: stale expectedReps → 409, no second log row — c61e152
+- [x] 2.8 wrangler dev: invalid rating / id → 400; foreign card → 404 — c61e152
 
 ### Phase 3: Review session UI & dashboard
 
 #### Automated
 
-- [ ] 3.1 `npm run build` passes
-- [ ] 3.2 `npm test` passes
-- [ ] 3.3 eslint on hook and review components passes
+- [x] 3.1 `npm run build` passes
+- [x] 3.2 `npm test` passes
+- [x] 3.3 eslint on hook and review components passes
 
 #### Manual
 
-- [ ] 3.4 Dashboard shows due count and links to `/review`
-- [ ] 3.5 Full flow works; "Nie pamiętam" card reappears in the same session (immediately when last); end screen shown
-- [ ] 3.6 "Kontynuuj" loads next batch; ties reshuffle on refresh
-- [ ] 3.7 Double-click records one review
-- [ ] 3.8 Keyboard shortcuts and cross-browser layout work
-- [ ] 3.9 Empty state shows next due date
+- [x] 3.4 Dashboard shows due count and links to `/review`
+- [x] 3.5 Full flow works; "Nie pamiętam" card reappears in the same session (immediately when last); end screen shown
+- [x] 3.6 "Kontynuuj" loads next batch; ties reshuffle on refresh
+- [x] 3.7 Double-click records one review
+- [x] 3.8 Keyboard shortcuts and cross-browser layout work
+- [x] 3.9 Empty state shows next due date
 
 ### Phase 4: Production rollout & evidence
 
