@@ -389,12 +389,12 @@ FSRS math is a few floating-point operations per card; the queue route computes 
 
 #### Automated
 
-- [x] 4.1 `npm run build` passes on merged `main`
-- [x] 4.2 `npm test` passes on merged `main`
+- [x] 4.1 `npm run build` passes on merged `main` — 7923f07
+- [x] 4.2 `npm test` passes on merged `main` — 7923f07
 
 #### Manual
 
-- [x] 4.3 Production two-account isolation verified
-- [x] 4.4 `cpuTime` for review routes recorded within limit
-- [x] 4.5 "Dobrze" card leaves the queue; due count drops; scheduled at labelled interval
-- [x] 4.6 No regressions in `/generate` save; new cards appear as New
+- [x] 4.3 Production two-account isolation verified — 7923f07
+- [x] 4.4 `cpuTime` for review routes recorded within limit — 7923f07
+- [x] 4.5 "Dobrze" card leaves the queue; due count drops; scheduled at labelled interval — 7923f07
+- [x] 4.6 No regressions in `/generate` save; new cards appear as New — 7923f07

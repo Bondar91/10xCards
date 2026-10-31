@@ -1,7 +1,7 @@
 ---
 change_id: srs-review-session
 title: Srs review session
-status: implementing
+status: implemented
 created: 2026-10-31
 updated: 2026-10-31
 archived_at: null
