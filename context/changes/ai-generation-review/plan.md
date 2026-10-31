@@ -339,34 +339,34 @@ Deploy, verify isolation and privacy on production, and measure the real CPU/wal
 
 #### Automated
 
-- [x] 2.1 `npm run build` passes
-- [x] 2.2 Changed TS files lint clean
-- [x] 2.3 `src/pages/api/ai/health.ts` no longer exists
+- [x] 2.1 `npm run build` passes — 9e75072
+- [x] 2.2 Changed TS files lint clean — 9e75072
+- [x] 2.3 `src/pages/api/ai/health.ts` no longer exists — 9e75072
 
 #### Manual
 
-- [x] 2.4 wrangler dev: anonymous POST /api/generations returns 401
-- [x] 2.5 wrangler dev: short input returns 400; real text returns cards and a text-free generations row
-- [x] 2.6 wrangler dev: save stores ai/ai-edited sources and counts; repeat save returns 409
-- [x] 2.7 wrangler dev: missing AI key returns 503; no text in logs
-- [x] 2.8 wrangler dev: 10,000-char input returns cards within timeout; latency recorded
+- [x] 2.4 wrangler dev: anonymous POST /api/generations returns 401 — 9e75072
+- [x] 2.5 wrangler dev: short input returns 400; real text returns cards and a text-free generations row — 9e75072
+- [x] 2.6 wrangler dev: save stores ai/ai-edited sources and counts; repeat save returns 409 — 9e75072
+- [x] 2.7 wrangler dev: missing AI key returns 503; no text in logs — 9e75072
+- [x] 2.8 wrangler dev: 10,000-char input returns cards within timeout; latency recorded — 9e75072
 
 ### Phase 3: Generate & review UI
 
 #### Automated
 
-- [ ] 3.1 `npm run build` passes
-- [ ] 3.2 Changed TS/TSX files lint clean
+- [x] 3.1 `npm run build` passes
+- [x] 3.2 Changed TS/TSX files lint clean
 
 #### Manual
 
-- [ ] 3.3 wrangler dev: full flow paste → progress → review → save → success; dashboard count increases
-- [ ] 3.4 Accept remaining keeps rejected and edited cards as decided; DB matches
-- [ ] 3.5 Edit restored to original saves as unedited
-- [ ] 3.6 All rejected records 0 accepted and inserts no flashcards
-- [ ] 3.7 AI error shows Polish message and keeps pasted text
-- [ ] 3.8 Anonymous /generate redirects to sign-in and returns after login
-- [ ] 3.9 Polish UI; works in latest Chrome, Firefox and Safari
+- [x] 3.3 wrangler dev: full flow paste → progress → review → save → success; dashboard count increases
+- [x] 3.4 Accept remaining keeps rejected and edited cards as decided; DB matches
+- [x] 3.5 Edit restored to original saves as unedited
+- [x] 3.6 All rejected records 0 accepted and inserts no flashcards
+- [x] 3.7 AI error shows Polish message and keeps pasted text
+- [x] 3.8 Anonymous /generate redirects to sign-in and returns after login
+- [x] 3.9 Polish UI; works in latest Chrome, Firefox and Safari
 
 ### Phase 4: Production rollout and evidence
 

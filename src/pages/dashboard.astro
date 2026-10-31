@@ -1,7 +1,16 @@
 ---
 import Layout from "@/layouts/Layout.astro";
+import { createClient } from "@/lib/supabase";
 
 const { user } = Astro.locals;
+
+// Count failure renders the page without the number (no page error).
+let flashcardCount: number | null = null;
+const supabase = createClient(Astro.request.headers, Astro.cookies);
+if (supabase) {
+  const { count, error } = await supabase.from("flashcards").select("*", { count: "exact", head: true });
+  if (!error) flashcardCount = count;
+}
 ---
 
 <Layout title="Panel">
@@ -13,7 +22,19 @@ const { user } = Astro.locals;
       <p class="text-blue-100/80">
         Witaj, <span class="font-semibold text-white">{user?.email}</span>
       </p>
-      <p class="mt-2 text-sm text-blue-100/50">Ta strona jest dostępna tylko dla zalogowanych użytkowników.</p>
+      {
+        flashcardCount !== null && (
+          <p class="mt-4 text-blue-100/80">
+            Zapisane fiszki: <span class="text-2xl font-semibold text-white">{flashcardCount}</span>
+          </p>
+        )
+      }
+      <a
+        href="/generate"
+        class="mt-6 inline-block rounded-lg bg-purple-600 px-5 py-2.5 font-medium text-white transition-colors hover:bg-purple-500"
+      >
+        Generuj fiszki
+      </a>
       <form method="POST" action="/api/auth/signout" class="mt-6">
         <button
           type="submit"

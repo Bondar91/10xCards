@@ -2,11 +2,8 @@ import type { APIRoute } from "astro";
 import { z } from "zod";
 import { createClient } from "@/lib/supabase";
 import { json, jsonError } from "@/lib/api-response";
-import {
-  generateFlashcards,
-  MAX_INPUT_LENGTH,
-  MIN_INPUT_LENGTH,
-} from "@/lib/services/flashcard-generator";
+import { generateFlashcards } from "@/lib/services/flashcard-generator";
+import { MAX_INPUT_LENGTH, MIN_INPUT_LENGTH } from "@/lib/flashcard-limits";
 import type { AiErrorKind } from "@/lib/services/ai-client";
 import type { GenerateResponse } from "@/types";
 

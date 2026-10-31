@@ -1,12 +1,11 @@
 import { z } from "zod";
 import { chatCompletion, type AiErrorKind } from "@/lib/services/ai-client";
 import type { FlashcardProposal } from "@/types";
-
-export const MIN_INPUT_LENGTH = 1_000;
-export const MAX_INPUT_LENGTH = 10_000;
-export const MAX_CARDS = 20;
-export const FRONT_MAX_LENGTH = 200;
-export const BACK_MAX_LENGTH = 500;
+import {
+  BACK_MAX_LENGTH,
+  FRONT_MAX_LENGTH,
+  MAX_CARDS,
+} from "@/lib/flashcard-limits";
 
 // Sized for 20 cards (≤ 200 + ≤ 500 chars each) plus JSON overhead.
 const MAX_TOKENS = 3_000;

@@ -2,7 +2,8 @@ import type { APIRoute } from "astro";
 import { z } from "zod";
 import { createClient } from "@/lib/supabase";
 import { json, jsonError } from "@/lib/api-response";
-import { MAX_CARDS, ProposalSchema } from "@/lib/services/flashcard-generator";
+import { ProposalSchema } from "@/lib/services/flashcard-generator";
+import { MAX_CARDS } from "@/lib/flashcard-limits";
 import type { SaveGenerationResponse } from "@/types";
 
 export const prerender = false;
