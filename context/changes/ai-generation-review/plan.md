@@ -372,15 +372,15 @@ Deploy, verify isolation and privacy on production, and measure the real CPU/wal
 
 #### Automated
 
-- [x] 4.1 `npm run build` passes on merged main
-- [x] 4.2 Production anonymous POST /api/generations returns 401
-- [x] 4.3 Production POST /api/ai/health returns 404
+- [x] 4.1 `npm run build` passes on merged main — 018669c
+- [x] 4.2 Production anonymous POST /api/generations returns 401 — 018669c
+- [x] 4.3 Production POST /api/ai/health returns 404 — 018669c
 
 #### Manual
 
-- [x] 4.4 Production full flow with ~3,000-char text
-- [x] 4.5 Production 10,000-char input completes; CPU and wall time recorded
-- [x] 4.6 Two-account isolation verified on production
-- [x] 4.7 No input or card text in wrangler tail; generations holds no text
-- [x] 4.8 Test-account rows cleaned up or excluded
-- [x] 4.9 Acceptance ratio query recorded once
+- [x] 4.4 Production full flow with ~3,000-char text — 018669c
+- [x] 4.5 Production 10,000-char input completes; CPU and wall time recorded — 018669c
+- [x] 4.6 Two-account isolation verified on production — 018669c
+- [x] 4.7 No input or card text in wrangler tail; generations holds no text — 018669c
+- [x] 4.8 Test-account rows cleaned up or excluded — 018669c
+- [x] 4.9 Acceptance ratio query recorded once — 018669c

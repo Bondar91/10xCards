@@ -1,7 +1,7 @@
 ---
 change_id: ai-generation-review
 title: Ai generation review
-status: implementing
+status: implemented
 created: 2026-10-31
 updated: 2026-10-31
 archived_at: null
