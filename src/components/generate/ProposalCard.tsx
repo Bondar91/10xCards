@@ -12,6 +12,9 @@ interface ProposalCardProps {
   card: ReviewCard;
   index: number;
   disabled: boolean;
+  editing: boolean;
+  onEditStart: () => void;
+  onEditCancel: () => void;
   onAccept: () => void;
   onReject: () => void;
   onUndo: () => void;
@@ -31,12 +34,14 @@ export function ProposalCard({
   card,
   index,
   disabled,
+  editing,
+  onEditStart,
+  onEditCancel,
   onAccept,
   onReject,
   onUndo,
   onUpdate,
 }: ProposalCardProps) {
-  const [editing, setEditing] = useState(false);
   const [front, setFront] = useState(card.front);
   const [back, setBack] = useState(card.back);
 
@@ -51,13 +56,12 @@ export function ProposalCard({
   function startEditing() {
     setFront(card.front);
     setBack(card.back);
-    setEditing(true);
+    onEditStart();
   }
 
   function commitEdit() {
     if (!draftValid) return;
     onUpdate(front, back);
-    setEditing(false);
   }
 
   const statusLabel = STATUS_LABEL[card.status];
@@ -99,6 +103,7 @@ export function ProposalCard({
             <textarea
               className={fieldClass}
               rows={2}
+              disabled={disabled}
               value={front}
               onChange={(e) => {
                 setFront(e.target.value);
@@ -120,6 +125,7 @@ export function ProposalCard({
             <textarea
               className={fieldClass}
               rows={3}
+              disabled={disabled}
               value={back}
               onChange={(e) => {
                 setBack(e.target.value);
@@ -140,7 +146,7 @@ export function ProposalCard({
             <Button
               size="sm"
               className="bg-purple-600 text-white hover:bg-purple-500"
-              disabled={!draftValid}
+              disabled={disabled || !draftValid}
               onClick={commitEdit}
             >
               <Check /> Zapisz zmiany
@@ -149,9 +155,8 @@ export function ProposalCard({
               size="sm"
               variant="ghost"
               className="text-blue-100 hover:bg-white/10 hover:text-white"
-              onClick={() => {
-                setEditing(false);
-              }}
+              disabled={disabled}
+              onClick={onEditCancel}
             >
               Anuluj
             </Button>

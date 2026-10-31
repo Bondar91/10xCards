@@ -1,7 +1,7 @@
 import type { APIRoute } from "astro";
 import { z } from "zod";
 import { createClient } from "@/lib/supabase";
-import { json, jsonError } from "@/lib/api-response";
+import { bodyTooLarge, json, jsonError } from "@/lib/api-response";
 import { generateFlashcards } from "@/lib/services/flashcard-generator";
 import { MAX_INPUT_LENGTH, MIN_INPUT_LENGTH } from "@/lib/flashcard-limits";
 import type { AiErrorKind } from "@/lib/services/ai-client";
@@ -40,6 +40,10 @@ const ERRORS: Record<
 export const POST: APIRoute = async (context) => {
   if (!context.locals.user) {
     return jsonError("Wymagane logowanie.", 401);
+  }
+
+  if (bodyTooLarge(context.request)) {
+    return jsonError("Żądanie jest zbyt duże.", 413, "validation");
   }
 
   let body: unknown;

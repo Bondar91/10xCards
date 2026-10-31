@@ -85,6 +85,8 @@ export function useFlashcardGeneration() {
   const [generationId, setGenerationId] = useState<string | null>(null);
   const [cards, setCards] = useState<ReviewCard[]>([]);
   const [savedCount, setSavedCount] = useState(0);
+  // Cards with an open inline edit — saving is blocked until every draft is committed or cancelled.
+  const [editingIds, setEditingIds] = useState<ReadonlySet<number>>(new Set());
 
   const acceptedCards = cards.filter((card) => card.status === "accepted");
 
@@ -120,12 +122,22 @@ export function useFlashcardGeneration() {
     );
   }
 
+  function setEditing(id: number, editing: boolean) {
+    setEditingIds((prev) => {
+      const next = new Set(prev);
+      if (editing) next.add(id);
+      else next.delete(id);
+      return next;
+    });
+  }
+
   function updateCard(id: number, front: string, back: string) {
     setCards((prev) =>
       prev.map((card) =>
         card.id === id ? { ...card, front, back, status: "accepted" } : card,
       ),
     );
+    setEditing(id, false);
   }
 
   function acceptRemaining() {
@@ -137,7 +149,7 @@ export function useFlashcardGeneration() {
   }
 
   async function save() {
-    if (!generationId) return;
+    if (!generationId || editingIds.size > 0) return;
     setError(null);
     setStep("saving");
 
@@ -173,6 +185,7 @@ export function useFlashcardGeneration() {
     setGenerationId(null);
     setCards([]);
     setSavedCount(0);
+    setEditingIds(new Set());
   }
 
   return {
@@ -191,9 +204,23 @@ export function useFlashcardGeneration() {
       setStatus(id, "rejected");
     },
     undo: (id: number) => {
-      setStatus(id, "pending");
+      // Undo restores the proposal as generated: status and content.
+      setCards((prev) =>
+        prev.map((card) =>
+          card.id === id
+            ? { ...card, ...card.original, status: "pending" }
+            : card,
+        ),
+      );
     },
     updateCard,
+    editingIds,
+    startEditing: (id: number) => {
+      setEditing(id, true);
+    },
+    cancelEditing: (id: number) => {
+      setEditing(id, false);
+    },
     acceptRemaining,
     save,
     reset,

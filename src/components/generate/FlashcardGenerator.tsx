@@ -52,6 +52,7 @@ export default function FlashcardGenerator() {
     const rejectedCount = gen.cards.filter(
       (c) => c.status === "rejected",
     ).length;
+    const editingAny = gen.editingIds.size > 0;
 
     return (
       <div className="space-y-4">
@@ -71,6 +72,13 @@ export default function FlashcardGenerator() {
               card={card}
               index={index}
               disabled={saving}
+              editing={gen.editingIds.has(card.id)}
+              onEditStart={() => {
+                gen.startEditing(card.id);
+              }}
+              onEditCancel={() => {
+                gen.cancelEditing(card.id);
+              }}
               onAccept={() => {
                 gen.accept(card.id);
               }}
@@ -89,17 +97,23 @@ export default function FlashcardGenerator() {
 
         <ServerError message={gen.error} />
 
+        {editingAny && (
+          <p className="text-right text-sm text-blue-100/70">
+            Zakończ edycję fiszki, aby zapisać.
+          </p>
+        )}
+
         <div className="flex flex-wrap justify-end gap-3">
           <Button
             className={secondaryButton}
-            disabled={saving || pendingCount === 0}
+            disabled={saving || editingAny || pendingCount === 0}
             onClick={gen.acceptRemaining}
           >
             <CheckCheck /> Akceptuj pozostałe
           </Button>
           <Button
             className={primaryButton}
-            disabled={saving}
+            disabled={saving || editingAny}
             onClick={() => void gen.save()}
           >
             {saving ? (

@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { z } from "astro/zod";
+import { z } from "zod";
 import { createClient } from "@/lib/supabase";
 import { authErrorMessage } from "@/lib/auth-errors";
 import { safeNext } from "@/lib/auth-redirect";

@@ -1,7 +1,7 @@
 import type { APIRoute } from "astro";
 import { z } from "zod";
 import { createClient } from "@/lib/supabase";
-import { json, jsonError } from "@/lib/api-response";
+import { bodyTooLarge, json, jsonError } from "@/lib/api-response";
 import { ProposalSchema } from "@/lib/services/flashcard-generator";
 import { MAX_CARDS } from "@/lib/flashcard-limits";
 import type { SaveGenerationResponse } from "@/types";
@@ -26,6 +26,10 @@ export const POST: APIRoute = async (context) => {
       400,
       "validation",
     );
+  }
+
+  if (bodyTooLarge(context.request)) {
+    return jsonError("Żądanie jest zbyt duże.", 413, "validation");
   }
 
   let body: unknown;
