@@ -324,32 +324,32 @@ Deploy, verify isolation and privacy on production, and measure the real CPU/wal
 
 #### Automated
 
-- [x] 1.1 `npm install` adds `zod` and `npm run build` passes
-- [x] 1.2 Changed TS files lint clean: `npx eslint src/types.ts src/lib/supabase.ts`
-- [x] 1.3 Generated database types include generations, flashcards and save_generation
+- [x] 1.1 `npm install` adds `zod` and `npm run build` passes — 6ed952b
+- [x] 1.2 Changed TS files lint clean: `npx eslint src/types.ts src/lib/supabase.ts` — 6ed952b
+- [x] 1.3 Generated database types include generations, flashcards and save_generation — 6ed952b
 
 #### Manual
 
-- [x] 1.4 Migration applied to Supabase Cloud; both tables visible with RLS enabled
-- [x] 1.5 User B cannot select user A's generations/flashcards; anon gets no rows
-- [x] 1.6 save_generation rejects a second save and another user's generation
-- [x] 1.7 Direct update on generations affects 0 rows
+- [x] 1.4 Migration applied to Supabase Cloud; both tables visible with RLS enabled — 6ed952b
+- [x] 1.5 User B cannot select user A's generations/flashcards; anon gets no rows — 6ed952b
+- [x] 1.6 save_generation rejects a second save and another user's generation — 6ed952b
+- [x] 1.7 Direct update on generations affects 0 rows — 6ed952b
 
 ### Phase 2: Generation and save API
 
 #### Automated
 
-- [ ] 2.1 `npm run build` passes
-- [ ] 2.2 Changed TS files lint clean
-- [ ] 2.3 `src/pages/api/ai/health.ts` no longer exists
+- [x] 2.1 `npm run build` passes
+- [x] 2.2 Changed TS files lint clean
+- [x] 2.3 `src/pages/api/ai/health.ts` no longer exists
 
 #### Manual
 
-- [ ] 2.4 wrangler dev: anonymous POST /api/generations returns 401
-- [ ] 2.5 wrangler dev: short input returns 400; real text returns cards and a text-free generations row
-- [ ] 2.6 wrangler dev: save stores ai/ai-edited sources and counts; repeat save returns 409
-- [ ] 2.7 wrangler dev: missing AI key returns 503; no text in logs
-- [ ] 2.8 wrangler dev: 10,000-char input returns cards within timeout; latency recorded
+- [x] 2.4 wrangler dev: anonymous POST /api/generations returns 401
+- [x] 2.5 wrangler dev: short input returns 400; real text returns cards and a text-free generations row
+- [x] 2.6 wrangler dev: save stores ai/ai-edited sources and counts; repeat save returns 409
+- [x] 2.7 wrangler dev: missing AI key returns 503; no text in logs
+- [x] 2.8 wrangler dev: 10,000-char input returns cards within timeout; latency recorded
 
 ### Phase 3: Generate & review UI
 
