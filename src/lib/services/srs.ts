@@ -7,6 +7,7 @@ import {
   type Grade,
   type ReviewLog,
 } from "ts-fsrs";
+import type { ReviewRating } from "@/types";
 
 // Pure FSRS helpers: no Supabase/Astro imports so this module stays unit-testable.
 
@@ -16,7 +17,7 @@ export const REVIEW_SESSION_LIMIT = 20;
 // Cards due again within this window come back in the same session (Anki's learn-ahead limit).
 export const REQUEUE_WINDOW_MS = 20 * 60 * 1000;
 
-export type ReviewGrade = 1 | 2 | 3 | 4;
+export type ReviewGrade = ReviewRating;
 
 // Rating.Manual (0) is not a valid review grade.
 export const RatingSchema = z

@@ -31,3 +31,36 @@ export interface ApiError {
   error: string;
   kind?: string;
 }
+
+// --- S-05 review session ---
+
+/** FSRS grade: 1 Again, 2 Hard, 3 Good, 4 Easy. */
+export type ReviewRating = 1 | 2 | 3 | 4;
+
+export type ReviewIntervals = Record<ReviewRating, string>;
+
+export interface ReviewCardDto {
+  id: string;
+  front: string;
+  back: string;
+  reps: number;
+  intervals: ReviewIntervals;
+}
+
+export interface ReviewQueueResponse {
+  cards: ReviewCardDto[];
+  dueTotal: number;
+  nextDueAt: string | null;
+}
+
+export interface SubmitReviewRequest {
+  flashcardId: string;
+  rating: ReviewRating;
+  expectedReps: number;
+}
+
+export interface SubmitReviewResponse {
+  reps: number;
+  intervals: ReviewIntervals;
+  requeue: boolean;
+}

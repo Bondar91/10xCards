@@ -341,32 +341,32 @@ FSRS math is a few floating-point operations per card; the queue route computes 
 
 #### Automated
 
-- [x] 1.1 `npm install` resolves `ts-fsrs` to 5.x and `vitest`
-- [x] 1.2 `npm test` passes
-- [x] 1.3 `npm run build` passes
-- [x] 1.4 eslint on SRS service, tests and vitest config passes
+- [x] 1.1 `npm install` resolves `ts-fsrs` to 5.x and `vitest` — 6db57d8
+- [x] 1.2 `npm test` passes — 6db57d8
+- [x] 1.3 `npm run build` passes — 6db57d8
+- [x] 1.4 eslint on SRS service, tests and vitest config passes — 6db57d8
 
 #### Manual
 
-- [x] 1.5 Migration applied; existing flashcards have `state = 0`, `reps = 0`, `due` set
-- [x] 1.6 RLS check under `set local role authenticated`: queue and logs return own rows only; direct insert denied
-- [x] 1.7 `database.types.ts` contains new columns and both functions
+- [x] 1.5 Migration applied; existing flashcards have `state = 0`, `reps = 0`, `due` set — 6db57d8
+- [x] 1.6 RLS check under `set local role authenticated`: queue and logs return own rows only; direct insert denied — 6db57d8
+- [x] 1.7 `database.types.ts` contains new columns and both functions — 6db57d8
 
 ### Phase 2: Review API
 
 #### Automated
 
-- [ ] 2.1 `npm run build` passes
-- [ ] 2.2 `npm test` passes
-- [ ] 2.3 eslint on review routes and types passes
+- [x] 2.1 `npm run build` passes
+- [x] 2.2 `npm test` passes
+- [x] 2.3 eslint on review routes and types passes
 
 #### Manual
 
-- [ ] 2.4 wrangler dev: anonymous queue and rating requests return 401
-- [ ] 2.5 wrangler dev: queue returns ≤ 20 own cards with interval labels; ts-fsrs runs in workerd
-- [ ] 2.6 wrangler dev: Again → requeue true; Good on review card → requeue false; log row written
-- [ ] 2.7 wrangler dev: stale expectedReps → 409, no second log row
-- [ ] 2.8 wrangler dev: invalid rating / id → 400; foreign card → 404
+- [x] 2.4 wrangler dev: anonymous queue and rating requests return 401
+- [x] 2.5 wrangler dev: queue returns ≤ 20 own cards with interval labels; ts-fsrs runs in workerd
+- [x] 2.6 wrangler dev: Again → requeue true; Good on review card → requeue false; log row written
+- [x] 2.7 wrangler dev: stale expectedReps → 409, no second log row
+- [x] 2.8 wrangler dev: invalid rating / id → 400; foreign card → 404
 
 ### Phase 3: Review session UI & dashboard
 
