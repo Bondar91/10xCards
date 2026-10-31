@@ -1,9 +1,9 @@
 ---
 change_id: ai-provider-gateway
 title: AI provider gateway — server-side LLM call on production with no text retention
-status: implemented
+status: impl_reviewed
 created: 2026-10-29
-updated: 2026-10-29
+updated: 2026-10-31
 archived_at: null
 ---
 
@@ -25,3 +25,4 @@ Roadmap item F-01 (issue https://github.com/Bondar91/10xCards/issues/1) from `co
 - **1.6 Secret**: `OPENROUTER_API_KEY` set on production by the user 2026-10-29 (not verifiable from the agent session — wrangler OAuth token expired; check with `npx wrangler secret list` in Phase 3). Key was pasted into the agent chat — rotate after Phase 3.
 - **Phase 2 (wrangler dev, 2026-10-29)**: anon → 401; logged-in → 200 `{model: mistralai/mistral-small-3.2-24b-instruct, latencyMs: 479}`; key removed → 503 `config`; no prompt text in dev logs. Direct OpenRouter call with ZDR flags was served by DeepInfra. Note: Astro `checkOrigin` returns 403 to a bare `curl -X POST` — add `-H 'Content-Type: application/json'` for curl checks.
 - **Phase 3 (production, 2026-10-29)**: https://10xcards.krystian-bondaruk.workers.dev — secret present (`wrangler secret list`); anon POST → 401 (bare `curl -X POST` → 403 from `checkOrigin`); logged-in POST → 200 `{model: mistralai/mistral-small-3.2-24b-instruct, latencyMs: 435}`; `wrangler tail`: **cpuTime 5 ms** / wallTime 510 ms (≤ 10 ms ✓); 0 prompt-text hits in tail logs; OpenRouter activity confirmed by user as served by a ZDR provider. Side observation: `GET /auth/signin` SSR measured 22 ms CPU (outcome ok) — relevant to S-01/S-02 CPU budget.
+- **Key rotation (2026-10-31, impl-review F1)**: OpenRouter API key rotated by the user (new key created, old one revoked, production secret and `.dev.vars` updated) — confirmed by user; the key pasted in Phase 1 is no longer valid.
