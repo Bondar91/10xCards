@@ -380,32 +380,32 @@ Merge to `main` (auto-deploy through the Cloudflare Git integration), verify the
 
 #### Automated
 
-- [x] 1.1 Migration applies cleanly: `npx supabase db push`
-- [x] 1.2 `src/db/database.types.ts` contains `update_flashcard_content`
-- [x] 1.3 Unit tests pass: `npm test`
-- [x] 1.4 Lint passes: `npm run lint`
-- [x] 1.5 Build passes: `npm run build`
+- [x] 1.1 Migration applies cleanly: `npx supabase db push` — 4991d44
+- [x] 1.2 `src/db/database.types.ts` contains `update_flashcard_content` — 4991d44
+- [x] 1.3 Unit tests pass: `npm test` — 4991d44
+- [x] 1.4 Lint passes: `npm run lint` — 4991d44
+- [x] 1.5 Build passes: `npm run build` — 4991d44
 
 #### Manual
 
-- [x] 1.6 Direct UPDATE of `due` / `source` affects 0 rows
-- [x] 1.7 Cross-user RPC raises `FC404`; cross-user delete affects 0 rows
-- [x] 1.8 No-op edit keeps `source = 'ai'`; changed edit flips to `'ai-edited'` and keeps SRS columns
+- [x] 1.6 Direct UPDATE of `due` / `source` affects 0 rows — 4991d44
+- [x] 1.7 Cross-user RPC raises `FC404`; cross-user delete affects 0 rows — 4991d44
+- [x] 1.8 No-op edit keeps `source = 'ai'`; changed edit flips to `'ai-edited'` and keeps SRS columns — 4991d44
 
 ### Phase 2: Deck API
 
 #### Automated
 
-- [ ] 2.1 Lint passes: `npm run lint`
-- [ ] 2.2 Build passes: `npm run build`
-- [ ] 2.3 Unit tests still pass: `npm test`
+- [x] 2.1 Lint passes: `npm run lint`
+- [x] 2.2 Build passes: `npm run build`
+- [x] 2.3 Unit tests still pass: `npm test`
 
 #### Manual
 
-- [ ] 2.4 `GET /api/flashcards` pages correctly, stable order, `?page=0` → 400, past-end → empty
-- [ ] 2.5 `PATCH` validation, `source` flip, SRS behaviour unchanged
-- [ ] 2.6 Cross-user `PATCH` / `DELETE` → 404; unauthenticated → 401
-- [ ] 2.7 `DELETE` removes card and its `review_logs`; repeat → 404
+- [x] 2.4 `GET /api/flashcards` pages correctly, stable order, `?page=0` → 400, past-end → empty
+- [x] 2.5 `PATCH` validation, `source` flip, SRS behaviour unchanged
+- [x] 2.6 Cross-user `PATCH` / `DELETE` → 404; unauthenticated → 401
+- [x] 2.7 `DELETE` removes card and its `review_logs`; repeat → 404
 
 ### Phase 3: Deck UI
 
