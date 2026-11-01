@@ -41,22 +41,9 @@ export function FlashcardDeck() {
     deck.goToPage(target);
   }
 
-  if (deck.status === "error" && deck.cards.length === 0) {
-    return (
-      <div className="space-y-4">
-        <ServerError message={deck.error} />
-        <Button
-          className="bg-purple-600 text-white hover:bg-purple-500"
-          onClick={deck.reload}
-        >
-          Spróbuj ponownie
-        </Button>
-      </div>
-    );
-  }
-
-  // The form stays mounted across spinner / empty / list so a create from an empty
-  // deck keeps its open state and focus through the page-1 reload.
+  // The form stays mounted across error / spinner / empty / list so a create from an
+  // empty deck keeps its open state and focus through the page-1 reload, even if that
+  // reload fails after the card was saved.
   return (
     <div className="space-y-4">
       <ServerError message={deck.error} />
@@ -71,7 +58,14 @@ export function FlashcardDeck() {
         onCreate={deck.createCard}
       />
 
-      {loading && deck.cards.length === 0 ? (
+      {deck.status === "error" && deck.cards.length === 0 ? (
+        <Button
+          className="bg-purple-600 text-white hover:bg-purple-500"
+          onClick={deck.reload}
+        >
+          Spróbuj ponownie
+        </Button>
+      ) : loading && deck.cards.length === 0 ? (
         <div className="flex justify-center py-12">
           <span className="size-6 animate-spin rounded-full border-2 border-white/30 border-t-white" />
         </div>
