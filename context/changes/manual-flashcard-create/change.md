@@ -1,7 +1,7 @@
 ---
 change_id: manual-flashcard-create
 title: Manual flashcard create
-status: implementing
+status: implemented
 created: 2026-11-01
 updated: 2026-11-01
 archived_at: null

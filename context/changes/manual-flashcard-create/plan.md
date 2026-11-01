@@ -307,13 +307,13 @@ None. The schema and INSERT policy already support manual cards. Rollback = reve
 
 #### Automated
 
-- [x] 3.1 `npm run build` passes on merged `main`
-- [x] 3.2 `npm test` passes on merged `main`
+- [x] 3.1 `npm run build` passes on merged `main` — fcfc35b
+- [x] 3.2 `npm test` passes on merged `main` — fcfc35b
 
 #### Manual
 
-- [x] 3.3 Production fresh-account manual create end-to-end
-- [x] 3.4 Production two-account isolation
-- [x] 3.5 Production PostgREST probe: `source = 'ai'` insert rejected
-- [x] 3.6 `wrangler tail` cpuTime for POST recorded
-- [x] 3.7 No regressions on production
+- [x] 3.3 Production fresh-account manual create end-to-end — fcfc35b
+- [x] 3.4 Production two-account isolation — fcfc35b
+- [x] 3.5 Production PostgREST probe: `source = 'ai'` insert rejected — fcfc35b
+- [x] 3.6 `wrangler tail` cpuTime for POST recorded — fcfc35b
+- [x] 3.7 No regressions on production — fcfc35b
