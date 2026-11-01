@@ -1,10 +1,10 @@
 ---
 change_id: ai-generation-review
 title: Ai generation review
-status: impl_reviewed
+status: archived
 created: 2026-10-31
-updated: 2026-10-31
-archived_at: null
+updated: 2026-11-01
+archived_at: 2026-11-01T13:33:48Z
 ---
 
 ## Notes

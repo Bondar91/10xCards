@@ -3,7 +3,7 @@ project: "10xCards"
 version: 1
 status: draft
 created: 2026-10-27
-updated: 2026-10-31
+updated: 2026-11-01
 backlog: https://github.com/Bondar91/10xCards/milestone/1
 prd_version: 1
 main_goal: speed
@@ -32,7 +32,7 @@ Ręczne tworzenie fiszek jest tak żmudne, że zniechęca do nauki metodą powt�
 | ---- | --------------------------------------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------ | ------------- | ------------------------- | -------- |
 | F-01 | [#1](https://github.com/Bondar91/10xCards/issues/1) | ai-provider-gateway       | (foundation) serwerowe wywołanie dostawcy LLM działa na produkcji, bez retencji tekstu i w limicie CPU | —             | FR-003, NFR prywatność AI | done     |
 | S-01 | [#2](https://github.com/Bondar91/10xCards/issues/2) | account-access-production | założyć konto, potwierdzić e-mail, zalogować się i wylogować na produkcji, trafiając do swojej strefy  | —             | FR-001, FR-002            | done |
-| S-02 | [#4](https://github.com/Bondar91/10xCards/issues/4) | ai-generation-review      | wkleić tekst, wygenerować fiszki przez AI, przejrzeć je i zapisać zaakceptowane do talii               | F-01, S-01    | US-01, FR-003, FR-004     | in-progress |
+| S-02 | [#4](https://github.com/Bondar91/10xCards/issues/4) | ai-generation-review      | wkleić tekst, wygenerować fiszki przez AI, przejrzeć je i zapisać zaakceptowane do talii               | F-01, S-01    | US-01, FR-003, FR-004     | done |
 | S-03 | [#5](https://github.com/Bondar91/10xCards/issues/5) | deck-browse-edit-delete   | przeglądać swoje zapisane fiszki, edytować je i usuwać                                                 | S-02          | FR-006                    | proposed |
 | S-04 | [#6](https://github.com/Bondar91/10xCards/issues/6) | manual-flashcard-create   | ręcznie dodać fiszkę (przód + tył) bez udziału AI                                                      | S-02          | FR-005                    | proposed |
 | S-05 | [#7](https://github.com/Bondar91/10xCards/issues/7) | srs-review-session        | rozpocząć sesję powtórek, oceniać odpowiedzi i mieć zaktualizowany harmonogram kolejnych powtórek      | S-02          | US-02, FR-007             | done |
@@ -100,7 +100,7 @@ Foundations below assume these are present and do NOT re-scaffold them.
 - **Unknowns:**
   - Czy zapisujemy liczbę wygenerowanych vs zaakceptowanych fiszek, żeby mierzyć kryterium 75%? — Owner: user. Block: no (patrz Open Roadmap Question 1).
 - **Risk:** Najtrudniejszy wycinek MVP — tu po raz pierwszy powstaje trwały zapis fiszek z izolacją per użytkownik (guardrail prywatności) oraz widoczny postęp przy długich wejściach (ryzyko timeoutu/CPU z `infrastructure.md`); dlatego idzie zaraz po F-01 i S-01.
-- **Status:** in-progress
+- **Status:** done
 
 ### S-03: Przeglądanie, edycja i usuwanie fiszek
 
@@ -170,3 +170,4 @@ Foundations below assume these are present and do NOT re-scaffold them.
 - **F-01: (foundation) jedno serwerowe wywołanie wybranego dostawcy LLM działa na wdrożonym Workerze z kluczem w sekretach, mieści się w limicie CPU runtime'u, a polityka retencji dostawcy jest potwierdzona jako zgodna z wymaganiem „tekst nie zostawia śladu”.** — Archived 2026-10-31 → `context/archive/2026-10-29-ai-provider-gateway/`. Lesson: —.
 - **S-01: użytkownik może założyć konto (e-mail + hasło), potwierdzić e-mail, zalogować się i wylogować na wdrożonej aplikacji, trafiając do swojej chronionej strefy; niezalogowany nie dostaje się do żadnej strony z fiszkami.** — Archived 2026-10-31 → `context/archive/2026-10-29-account-access-production/`. Lesson: —.
 - **S-05: użytkownik może rozpocząć sesję powtórek, widzieć fiszki w kolejności wyznaczonej przez algorytm SRS, po każdej ocenić, jak dobrze ją znał, a termin kolejnej powtórki zostaje zaktualizowany.** — Archived 2026-10-31 → `context/archive/2026-10-31-srs-review-session/`. Lesson: —.
+- **S-02: użytkownik może wkleić tekst, widzieć postęp podczas generowania, przejrzeć listę proponowanych fiszek (przód/tył), zaakceptować, edytować lub odrzucić każdą albo zaakceptować wszystkie naraz, a zaakceptowane trafiają trwale do jego prywatnej talii.** — Archived 2026-11-01 → `context/archive/2026-10-31-ai-generation-review/`. Lesson: —.
