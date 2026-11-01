@@ -64,3 +64,29 @@ export interface SubmitReviewResponse {
   intervals: ReviewIntervals;
   requeue: boolean;
 }
+
+// --- S-03 deck ---
+
+export interface FlashcardDto {
+  id: string;
+  front: string;
+  back: string;
+  source: FlashcardSource;
+  createdAt: string;
+}
+
+export interface FlashcardListResponse {
+  cards: FlashcardDto[];
+  total: number;
+  page: number;
+  pageSize: number;
+}
+
+export interface UpdateFlashcardRequest {
+  front: string;
+  back: string;
+}
+
+export interface UpdateFlashcardResponse {
+  card: FlashcardDto;
+}

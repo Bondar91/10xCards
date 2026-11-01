@@ -242,6 +242,35 @@ export type Database = {
         Args: { p_cards: Json; p_generation_id: string }
         Returns: number
       }
+      update_flashcard_content: {
+        Args: { p_back: string; p_flashcard_id: string; p_front: string }
+        Returns: {
+          back: string
+          created_at: string
+          difficulty: number
+          due: string
+          elapsed_days: number
+          front: string
+          generation_id: string | null
+          id: string
+          lapses: number
+          last_review: string | null
+          learning_steps: number
+          reps: number
+          scheduled_days: number
+          source: string
+          stability: number
+          state: number
+          updated_at: string
+          user_id: string
+        }
+        SetofOptions: {
+          from: "*"
+          to: "flashcards"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
     }
     Enums: {
       [_ in never]: never

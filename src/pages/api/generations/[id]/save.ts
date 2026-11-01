@@ -2,7 +2,7 @@ import type { APIRoute } from "astro";
 import { z } from "zod";
 import { createClient } from "@/lib/supabase";
 import { bodyTooLarge, json, jsonError } from "@/lib/api-response";
-import { ProposalSchema } from "@/lib/services/flashcard-generator";
+import { FlashcardContentSchema } from "@/lib/services/flashcards";
 import { MAX_CARDS } from "@/lib/flashcard-limits";
 import type { SaveGenerationResponse } from "@/types";
 
@@ -11,7 +11,9 @@ export const prerender = false;
 const IdSchema = z.uuid();
 
 const SaveSchema = z.object({
-  cards: z.array(ProposalSchema.extend({ edited: z.boolean() })).max(MAX_CARDS),
+  cards: z
+    .array(FlashcardContentSchema.extend({ edited: z.boolean() }))
+    .max(MAX_CARDS),
 });
 
 export const POST: APIRoute = async (context) => {
