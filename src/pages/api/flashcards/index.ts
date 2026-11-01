@@ -1,13 +1,14 @@
 import type { APIRoute } from "astro";
 import { createClient } from "@/lib/supabase";
-import { json, jsonError } from "@/lib/api-response";
+import { bodyTooLarge, json, jsonError } from "@/lib/api-response";
 import {
   FLASHCARDS_PAGE_SIZE,
+  FlashcardContentSchema,
   PageQuerySchema,
   pageRange,
   toFlashcardDto,
 } from "@/lib/services/flashcards";
-import type { FlashcardListResponse } from "@/types";
+import type { CreateFlashcardResponse, FlashcardListResponse } from "@/types";
 
 export const prerender = false;
 
@@ -77,5 +78,63 @@ export const GET: APIRoute = async (context) => {
       pageSize: FLASHCARDS_PAGE_SIZE,
     } satisfies FlashcardListResponse,
     200,
+  );
+};
+
+const INVALID_CONTENT = "Nieprawidłowa treść fiszki.";
+
+// CHECK violation (front/back length) — the zod schema should catch it first.
+const CHECK_VIOLATION = "23514";
+
+export const POST: APIRoute = async (context) => {
+  if (!context.locals.user) {
+    return jsonError("Wymagane logowanie.", 401);
+  }
+
+  if (bodyTooLarge(context.request)) {
+    return jsonError("Żądanie jest zbyt duże.", 413, "validation");
+  }
+
+  let body: unknown;
+  try {
+    body = await context.request.json();
+  } catch {
+    return jsonError("Nieprawidłowe żądanie.", 400, "validation");
+  }
+
+  const parsed = FlashcardContentSchema.safeParse(body);
+  if (!parsed.success) {
+    return jsonError(INVALID_CONTENT, 400, "validation");
+  }
+
+  const supabase = createClient(context.request.headers, context.cookies);
+  if (!supabase) {
+    return jsonError("Baza danych nie jest skonfigurowana.", 503, "config");
+  }
+
+  // user_id defaults to auth.uid(); flashcards_insert_own only admits source = 'manual'
+  // with no generation_id, so the caller cannot forge AI cards or write for someone else.
+  const { data, error } = await supabase
+    .from("flashcards")
+    .insert({
+      front: parsed.data.front,
+      back: parsed.data.back,
+      source: "manual",
+    })
+    .select("id, front, back, source, created_at")
+    .single();
+
+  if (error) {
+    if (error.code === CHECK_VIOLATION) {
+      return jsonError(INVALID_CONTENT, 400, "validation");
+    }
+    // eslint-disable-next-line no-console
+    console.error("flashcard create failed", { code: error.code });
+    return jsonError("Nie udało się dodać fiszki. Spróbuj ponownie.", 500);
+  }
+
+  return json(
+    { card: toFlashcardDto(data) } satisfies CreateFlashcardResponse,
+    201,
   );
 };

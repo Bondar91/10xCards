@@ -90,3 +90,14 @@ export interface UpdateFlashcardRequest {
 export interface UpdateFlashcardResponse {
   card: FlashcardDto;
 }
+
+// --- S-04 manual create ---
+
+export interface CreateFlashcardRequest {
+  front: string;
+  back: string;
+}
+
+export interface CreateFlashcardResponse {
+  card: FlashcardDto;
+}

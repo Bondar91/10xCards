@@ -33,8 +33,8 @@ Ręczne tworzenie fiszek jest tak żmudne, że zniechęca do nauki metodą powt�
 | F-01 | [#1](https://github.com/Bondar91/10xCards/issues/1) | ai-provider-gateway       | (foundation) serwerowe wywołanie dostawcy LLM działa na produkcji, bez retencji tekstu i w limicie CPU | —             | FR-003, NFR prywatność AI | done     |
 | S-01 | [#2](https://github.com/Bondar91/10xCards/issues/2) | account-access-production | założyć konto, potwierdzić e-mail, zalogować się i wylogować na produkcji, trafiając do swojej strefy  | —             | FR-001, FR-002            | done |
 | S-02 | [#4](https://github.com/Bondar91/10xCards/issues/4) | ai-generation-review      | wkleić tekst, wygenerować fiszki przez AI, przejrzeć je i zapisać zaakceptowane do talii               | F-01, S-01    | US-01, FR-003, FR-004     | done |
-| S-03 | [#5](https://github.com/Bondar91/10xCards/issues/5) | deck-browse-edit-delete   | przeglądać swoje zapisane fiszki, edytować je i usuwać                                                 | S-02          | FR-006                    | proposed |
-| S-04 | [#6](https://github.com/Bondar91/10xCards/issues/6) | manual-flashcard-create   | ręcznie dodać fiszkę (przód + tył) bez udziału AI                                                      | S-02          | FR-005                    | proposed |
+| S-03 | [#5](https://github.com/Bondar91/10xCards/issues/5) | deck-browse-edit-delete   | przeglądać swoje zapisane fiszki, edytować je i usuwać                                                 | S-02          | FR-006                    | done |
+| S-04 | [#6](https://github.com/Bondar91/10xCards/issues/6) | manual-flashcard-create   | ręcznie dodać fiszkę (przód + tył) bez udziału AI                                                      | S-02          | FR-005                    | in-progress |
 | S-05 | [#7](https://github.com/Bondar91/10xCards/issues/7) | srs-review-session        | rozpocząć sesję powtórek, oceniać odpowiedzi i mieć zaktualizowany harmonogram kolejnych powtórek      | S-02          | US-02, FR-007             | done |
 
 ## Streams
@@ -112,7 +112,7 @@ Foundations below assume these are present and do NOT re-scaffold them.
 - **Blockers:** —
 - **Unknowns:** —
 - **Risk:** Bez edycji błędy AI zostają w talii na stałe (PRD, FR-006); sekwencjonowane po S-02, bo dopiero wtedy istnieją fiszki do zarządzania.
-- **Status:** proposed
+- **Status:** done
 
 ### S-04: Ręczne dodawanie fiszki
 
@@ -124,7 +124,7 @@ Foundations below assume these are present and do NOT re-scaffold them.
 - **Blockers:** —
 - **Unknowns:** —
 - **Risk:** To ścieżka awaryjna z guardrailu „awaria AI nie blokuje aplikacji”; idzie po S-02 (a nie przed), bo przy celu `speed` korzysta z istniejącego już zapisu fiszek zamiast budować go od zera.
-- **Status:** proposed
+- **Status:** in-progress
 
 ### S-05: Sesja powtórek SRS
 
@@ -170,4 +170,5 @@ Foundations below assume these are present and do NOT re-scaffold them.
 - **F-01: (foundation) jedno serwerowe wywołanie wybranego dostawcy LLM działa na wdrożonym Workerze z kluczem w sekretach, mieści się w limicie CPU runtime'u, a polityka retencji dostawcy jest potwierdzona jako zgodna z wymaganiem „tekst nie zostawia śladu”.** — Archived 2026-10-31 → `context/archive/2026-10-29-ai-provider-gateway/`. Lesson: —.
 - **S-01: użytkownik może założyć konto (e-mail + hasło), potwierdzić e-mail, zalogować się i wylogować na wdrożonej aplikacji, trafiając do swojej chronionej strefy; niezalogowany nie dostaje się do żadnej strony z fiszkami.** — Archived 2026-10-31 → `context/archive/2026-10-29-account-access-production/`. Lesson: —.
 - **S-05: użytkownik może rozpocząć sesję powtórek, widzieć fiszki w kolejności wyznaczonej przez algorytm SRS, po każdej ocenić, jak dobrze ją znał, a termin kolejnej powtórki zostaje zaktualizowany.** — Archived 2026-10-31 → `context/archive/2026-10-31-srs-review-session/`. Lesson: —.
+- **S-03: użytkownik może zobaczyć listę swoich zapisanych fiszek, poprawić treść dowolnej z nich i usunąć niepotrzebne.** — Archived 2026-11-01 → `context/archive/2026-11-01-deck-browse-edit-delete/`. Lesson: —.
 - **S-02: użytkownik może wkleić tekst, widzieć postęp podczas generowania, przejrzeć listę proponowanych fiszek (przód/tył), zaakceptować, edytować lub odrzucić każdą albo zaakceptować wszystkie naraz, a zaakceptowane trafiają trwale do jego prywatnej talii.** — Archived 2026-11-01 → `context/archive/2026-10-31-ai-generation-review/`. Lesson: —.
