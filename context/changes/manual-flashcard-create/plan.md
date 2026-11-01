@@ -288,32 +288,32 @@ None. The schema and INSERT policy already support manual cards. Rollback = reve
 
 #### Automated
 
-- [x] 2.1 Unit tests still pass: `npm test`
-- [x] 2.2 Lint passes: `npm run lint`
-- [x] 2.3 Build passes: `npm run build`
+- [x] 2.1 Unit tests still pass: `npm test` — 93d7146
+- [x] 2.2 Lint passes: `npm run lint` — 93d7146
+- [x] 2.3 Build passes: `npm run build` — 93d7146
 
 #### Manual
 
-- [x] 2.4 Fresh account: dashboard link and empty-state form create the first card
-- [x] 2.5 Add from page 3 lands on page 1, form stays open with focus on Przód
-- [x] 2.6 Double-click creates exactly one card
-- [x] 2.7 Counters and Dodaj disable on invalid drafts
-- [x] 2.8 Server failure shows error and keeps the draft
-- [x] 2.9 DeckCard edit unchanged after refactor
-- [x] 2.10 New card appears in /review
-- [x] 2.11 No regressions in /generate and /review
+- [x] 2.4 Fresh account: dashboard link and empty-state form create the first card — 93d7146
+- [x] 2.5 Add from page 3 lands on page 1, form stays open with focus on Przód — 93d7146
+- [x] 2.6 Double-click creates exactly one card — 93d7146
+- [x] 2.7 Counters and Dodaj disable on invalid drafts — 93d7146
+- [x] 2.8 Server failure shows error and keeps the draft — 93d7146
+- [x] 2.9 DeckCard edit unchanged after refactor — 93d7146
+- [x] 2.10 New card appears in /review — 93d7146
+- [x] 2.11 No regressions in /generate and /review — 93d7146
 
 ### Phase 3: Production rollout & evidence
 
 #### Automated
 
-- [ ] 3.1 `npm run build` passes on merged `main`
-- [ ] 3.2 `npm test` passes on merged `main`
+- [x] 3.1 `npm run build` passes on merged `main`
+- [x] 3.2 `npm test` passes on merged `main`
 
 #### Manual
 
-- [ ] 3.3 Production fresh-account manual create end-to-end
-- [ ] 3.4 Production two-account isolation
-- [ ] 3.5 Production PostgREST probe: `source = 'ai'` insert rejected
-- [ ] 3.6 `wrangler tail` cpuTime for POST recorded
-- [ ] 3.7 No regressions on production
+- [x] 3.3 Production fresh-account manual create end-to-end
+- [x] 3.4 Production two-account isolation
+- [x] 3.5 Production PostgREST probe: `source = 'ai'` insert rejected
+- [x] 3.6 `wrangler tail` cpuTime for POST recorded
+- [x] 3.7 No regressions on production
