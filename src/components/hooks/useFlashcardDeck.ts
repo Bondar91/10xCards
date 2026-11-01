@@ -26,7 +26,10 @@ interface LoadedPage {
   result: RequestResult<FlashcardListResponse>;
 }
 
-/** Fetch a page; if it is empty (deletes here or in another tab), step back until one has cards. */
+/**
+ * Fetch a page; if it is empty (deletes here or in another tab), jump to the last
+ * page per the returned total. Loops only if the deck keeps shrinking meanwhile.
+ */
 async function fetchPage(target: number): Promise<LoadedPage> {
   let page = target;
   for (;;) {
@@ -37,7 +40,9 @@ async function fetchPage(target: number): Promise<LoadedPage> {
     if (!result.ok || result.data.cards.length > 0 || page <= 1) {
       return { page, result };
     }
-    page -= 1;
+    const { total, pageSize } = result.data;
+    const lastPage = Math.max(1, Math.ceil(total / pageSize));
+    page = Math.min(page - 1, lastPage);
   }
 }
 
@@ -67,10 +72,15 @@ export function useFlashcardDeck() {
   }
 
   useEffect(() => {
+    let cancelled = false;
     const seq = ++requestSeq.current;
     void fetchPage(1).then((loaded) => {
-      if (seq === requestSeq.current) applyPage(loaded);
+      if (!cancelled && seq === requestSeq.current) applyPage(loaded);
     });
+    // Drop the in-flight load on unmount (and on the StrictMode re-run).
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   async function reloadAt(target: number) {
@@ -134,6 +144,8 @@ export function useFlashcardDeck() {
     }
 
     if (!result.ok) setError(GONE_MESSAGE);
+    // Drop it locally so it doesn't linger if the reload below fails.
+    setCards((prev) => prev.filter((c) => c.id !== id));
     await reloadAt(page);
     return true;
   }

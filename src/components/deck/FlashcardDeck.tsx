@@ -19,6 +19,8 @@ export function FlashcardDeck() {
   const [active, setActive] = useState<ActiveCard | null>(null);
 
   const loading = deck.status === "loading";
+  // A pending edit/delete reloads the page it started on; paging meanwhile would be undone.
+  const navLocked = loading || deck.busyId !== null;
 
   function modeFor(id: string): DeckCardMode {
     return active?.id === id ? active.mode : "view";
@@ -114,7 +116,7 @@ export function FlashcardDeck() {
             size="sm"
             variant="ghost"
             className={navButton}
-            disabled={loading || deck.page <= 1}
+            disabled={navLocked || deck.page <= 1}
             onClick={() => {
               goToPage(deck.page - 1);
             }}
@@ -128,7 +130,7 @@ export function FlashcardDeck() {
             size="sm"
             variant="ghost"
             className={navButton}
-            disabled={loading || deck.page >= deck.totalPages}
+            disabled={navLocked || deck.page >= deck.totalPages}
             onClick={() => {
               goToPage(deck.page + 1);
             }}

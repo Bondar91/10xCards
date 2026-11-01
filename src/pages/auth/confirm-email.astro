@@ -6,26 +6,33 @@ import { parseConfirmReason, type ConfirmReason } from "@/lib/auth-redirect";
 const reason = parseConfirmReason(Astro.url.searchParams.get("reason"));
 const error = Astro.url.searchParams.get("error");
 
-const CONTENT: Record<ConfirmReason, { emoji: string; heading: string; description: string }> = {
+const CONTENT: Record<
+  ConfirmReason,
+  { emoji: string; heading: string; description: string }
+> = {
   sent: {
     emoji: "📧",
     heading: "Sprawdź skrzynkę",
-    description: "Wysłaliśmy link potwierdzający na Twój adres e-mail. Kliknij go, aby aktywować konto.",
+    description:
+      "Wysłaliśmy link potwierdzający na Twój adres e-mail. Kliknij go, aby aktywować konto.",
   },
   unconfirmed: {
     emoji: "✉️",
     heading: "Potwierdź adres e-mail",
-    description: "Twoje konto nie zostało jeszcze potwierdzone. Kliknij link z wiadomości albo wyślij go ponownie.",
+    description:
+      "Twoje konto nie zostało jeszcze potwierdzone. Kliknij link z wiadomości albo wyślij go ponownie.",
   },
   expired: {
     emoji: "⏳",
     heading: "Link wygasł",
-    description: "Link potwierdzający wygasł lub został już użyty. Wyślij nowy link poniżej.",
+    description:
+      "Link potwierdzający wygasł lub został już użyty. Wyślij nowy link poniżej.",
   },
   resent: {
     emoji: "📨",
     heading: "Wysłaliśmy nowy link",
-    description: "Jeśli konto z tym adresem istnieje i nie jest potwierdzone, nowy link jest już w drodze.",
+    description:
+      "Jeśli konto z tym adresem istnieje i nie jest potwierdzone, nowy link jest już w drodze.",
   },
 };
 
@@ -38,12 +45,17 @@ const content = CONTENT[reason];
       class="w-full max-w-sm rounded-2xl border border-white/10 bg-white/10 p-8 text-center text-white backdrop-blur-xl"
     >
       <div class="mb-4 text-5xl">{content.emoji}</div>
-      <h1 class="mb-3 bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-2xl font-bold text-transparent">
+      <h1
+        class="mb-3 bg-gradient-to-r from-blue-200 to-purple-200 bg-clip-text text-2xl font-bold text-transparent"
+      >
         {content.heading}
       </h1>
       <p class="mb-6 text-blue-100/80">{content.description}</p>
       <ResendConfirmationForm reason={reason} serverError={error} client:load />
-      <a href="/auth/signin" class="mt-6 inline-block text-sm text-purple-300 hover:underline">
+      <a
+        href="/auth/signin"
+        class="mt-6 inline-block text-sm text-purple-300 hover:underline"
+      >
         Wróć do logowania
       </a>
     </div>

@@ -8,7 +8,10 @@ interface Props {
 const { variant = "info" } = Astro.props;
 ---
 
-<div class:list={["banner", `banner--${variant}`]} role={variant === "error" ? "alert" : "status"}>
+<div
+  class:list={["banner", `banner--${variant}`]}
+  role={variant === "error" ? "alert" : "status"}
+>
   <slot />
 </div>
 

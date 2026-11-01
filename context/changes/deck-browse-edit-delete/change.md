@@ -1,7 +1,7 @@
 ---
 change_id: deck-browse-edit-delete
 title: Deck browse edit delete
-status: implemented
+status: impl_reviewed
 created: 2026-11-01
 updated: 2026-11-01
 archived_at: null

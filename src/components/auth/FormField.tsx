@@ -38,7 +38,9 @@ export function FormField({
         {label}
       </label>
       <div className="relative">
-        <span className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-white/40">{icon}</span>
+        <span className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-white/40">
+          {icon}
+        </span>
         <input
           id={id}
           name={name ?? id}
@@ -50,7 +52,9 @@ export function FormField({
           placeholder={placeholder}
           className={cn(
             inputBase,
-            error ? "border-red-400/60 focus:ring-red-400" : "border-white/20 focus:ring-purple-400",
+            error
+              ? "border-red-400/60 focus:ring-red-400"
+              : "border-white/20 focus:ring-purple-400",
           )}
         />
         {endContent}

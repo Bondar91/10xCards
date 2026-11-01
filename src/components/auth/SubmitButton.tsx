@@ -8,7 +8,11 @@ interface SubmitButtonProps {
   children: ReactNode;
 }
 
-export function SubmitButton({ pendingText, icon, children }: SubmitButtonProps) {
+export function SubmitButton({
+  pendingText,
+  icon,
+  children,
+}: SubmitButtonProps) {
   const { pending } = useFormStatus();
 
   return (
