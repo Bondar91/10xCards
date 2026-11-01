@@ -37,7 +37,7 @@ Safety notes checked with no finding:
 - **Location**: context/changes/manual-flashcard-create/plan.md:318, change.md (Evidence)
 - **Detail**: Progress 3.6 "`wrangler tail` cpuTime for POST recorded" is `[x]`, but the evidence only says "within the Workers limit (exact value not recorded)". The same gap was left open in S-03 for `GET /api/flashcards`, so the deck routes still have no measured CPU baseline.
 - **Fix**: Capture one `wrangler tail` sample for `POST /api/flashcards` (and `GET`, to close the S-03 gap) and add the numbers to the Evidence in change.md.
-- **Decision**: PENDING — fix accepted; awaiting `wrangler tail` cpuTime values from the user to add to Evidence
+- **Decision**: ACCEPTED — user accepted production verification without a recorded cpuTime value (2026-11-01)
 
 ### F2 — Form-state design deviates from the plan without an addendum
 
