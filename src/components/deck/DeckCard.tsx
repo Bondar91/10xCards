@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Check, Pencil, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { BACK_MAX_LENGTH, FRONT_MAX_LENGTH } from "@/lib/flashcard-limits";
+import { FlashcardFields } from "@/components/deck/FlashcardFields";
+import { flashcardDraftState } from "@/lib/flashcard-limits";
 import { cn } from "@/lib/utils";
 import type {
   FlashcardDto,
@@ -29,9 +30,6 @@ const SOURCE_LABEL: Record<FlashcardSource, string> = {
   manual: "Ręczna",
 };
 
-const fieldClass =
-  "w-full rounded-lg border border-white/20 bg-white/5 px-3 py-2 text-sm text-white placeholder:text-blue-100/40 focus:border-purple-400 focus:outline-none";
-
 const ghostButton = "text-blue-100 hover:bg-white/10 hover:text-white";
 
 export function DeckCard({
@@ -48,13 +46,7 @@ export function DeckCard({
   const [front, setFront] = useState(card.front);
   const [back, setBack] = useState(card.back);
 
-  const frontLength = front.trim().length;
-  const backLength = back.trim().length;
-  const draftValid =
-    frontLength >= 1 &&
-    frontLength <= FRONT_MAX_LENGTH &&
-    backLength >= 1 &&
-    backLength <= BACK_MAX_LENGTH;
+  const draftValid = flashcardDraftState(front, back).valid;
 
   function startEditing() {
     setFront(card.front);
@@ -91,50 +83,13 @@ export function DeckCard({
 
       {mode === "edit" ? (
         <div className="space-y-3">
-          <label className="block space-y-1 text-sm">
-            <span className="text-blue-100/80">Przód</span>
-            <textarea
-              className={fieldClass}
-              rows={2}
-              disabled={busy}
-              value={front}
-              onChange={(e) => {
-                setFront(e.target.value);
-              }}
-            />
-            <span
-              className={cn(
-                "block text-xs",
-                frontLength > FRONT_MAX_LENGTH
-                  ? "text-red-300"
-                  : "text-blue-100/50",
-              )}
-            >
-              {frontLength} / {FRONT_MAX_LENGTH}
-            </span>
-          </label>
-          <label className="block space-y-1 text-sm">
-            <span className="text-blue-100/80">Tył</span>
-            <textarea
-              className={fieldClass}
-              rows={3}
-              disabled={busy}
-              value={back}
-              onChange={(e) => {
-                setBack(e.target.value);
-              }}
-            />
-            <span
-              className={cn(
-                "block text-xs",
-                backLength > BACK_MAX_LENGTH
-                  ? "text-red-300"
-                  : "text-blue-100/50",
-              )}
-            >
-              {backLength} / {BACK_MAX_LENGTH}
-            </span>
-          </label>
+          <FlashcardFields
+            front={front}
+            back={back}
+            onFrontChange={setFront}
+            onBackChange={setBack}
+            disabled={busy}
+          />
           <div className="flex gap-2">
             <Button
               size="sm"

@@ -274,34 +274,34 @@ None. The schema and INSERT policy already support manual cards. Rollback = reve
 
 #### Automated
 
-- [x] 1.1 Unit tests pass: `npm test`
-- [x] 1.2 Lint passes: `npm run lint`
-- [x] 1.3 Build passes: `npm run build`
+- [x] 1.1 Unit tests pass: `npm test` — 341ef0c
+- [x] 1.2 Lint passes: `npm run lint` — 341ef0c
+- [x] 1.3 Build passes: `npm run build` — 341ef0c
 
 #### Manual
 
-- [x] 1.4 `curl` checks of `POST /api/flashcards` (201 / 400 / 401)
-- [x] 1.5 RLS probes: non-manual, generation_id and foreign user_id inserts rejected
-- [x] 1.6 Created card has FSRS defaults and is in the review queue
+- [x] 1.4 `curl` checks of `POST /api/flashcards` (201 / 400 / 401) — 341ef0c
+- [x] 1.5 RLS probes: non-manual, generation_id and foreign user_id inserts rejected — 341ef0c
+- [x] 1.6 Created card has FSRS defaults and is in the review queue — 341ef0c
 
 ### Phase 2: Create UI
 
 #### Automated
 
-- [ ] 2.1 Unit tests still pass: `npm test`
-- [ ] 2.2 Lint passes: `npm run lint`
-- [ ] 2.3 Build passes: `npm run build`
+- [x] 2.1 Unit tests still pass: `npm test`
+- [x] 2.2 Lint passes: `npm run lint`
+- [x] 2.3 Build passes: `npm run build`
 
 #### Manual
 
-- [ ] 2.4 Fresh account: dashboard link and empty-state form create the first card
-- [ ] 2.5 Add from page 3 lands on page 1, form stays open with focus on Przód
-- [ ] 2.6 Double-click creates exactly one card
-- [ ] 2.7 Counters and Dodaj disable on invalid drafts
-- [ ] 2.8 Server failure shows error and keeps the draft
-- [ ] 2.9 DeckCard edit unchanged after refactor
-- [ ] 2.10 New card appears in /review
-- [ ] 2.11 No regressions in /generate and /review
+- [x] 2.4 Fresh account: dashboard link and empty-state form create the first card
+- [x] 2.5 Add from page 3 lands on page 1, form stays open with focus on Przód
+- [x] 2.6 Double-click creates exactly one card
+- [x] 2.7 Counters and Dodaj disable on invalid drafts
+- [x] 2.8 Server failure shows error and keeps the draft
+- [x] 2.9 DeckCard edit unchanged after refactor
+- [x] 2.10 New card appears in /review
+- [x] 2.11 No regressions in /generate and /review
 
 ### Phase 3: Production rollout & evidence
 

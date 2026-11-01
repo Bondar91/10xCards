@@ -1,10 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import {
+  postJson,
   requestJson,
   type RequestResult,
   type StatusMessages,
 } from "@/lib/request-json";
 import type {
+  CreateFlashcardRequest,
+  CreateFlashcardResponse,
   FlashcardDto,
   FlashcardListResponse,
   UpdateFlashcardRequest,
@@ -55,6 +58,8 @@ export function useFlashcardDeck() {
   const [error, setError] = useState<string | null>(null);
   // Id of the card whose edit/delete request is in flight.
   const [busyId, setBusyId] = useState<string | null>(null);
+  // A manual create is in flight; card actions and paging wait for its page-1 reload.
+  const [creating, setCreating] = useState(false);
   // Only the latest list request may update state (fast paging, refetch after delete).
   const requestSeq = useRef(0);
 
@@ -128,6 +133,27 @@ export function useFlashcardDeck() {
     return false;
   }
 
+  /** Create a manual card; on success the newest-first list reloads at page 1. */
+  async function createCard(content: CreateFlashcardRequest): Promise<boolean> {
+    setCreating(true);
+    setError(null);
+    const result = await postJson<CreateFlashcardResponse>(
+      "/api/flashcards",
+      content,
+      STATUS_MESSAGES,
+    );
+
+    if (!result.ok) {
+      setCreating(false);
+      setError(result.message);
+      return false;
+    }
+
+    await reloadAt(1);
+    setCreating(false);
+    return true;
+  }
+
   async function deleteCard(id: string): Promise<boolean> {
     setBusyId(id);
     setError(null);
@@ -160,11 +186,13 @@ export function useFlashcardDeck() {
     status,
     error,
     busyId,
+    creating,
     goToPage,
     reload: () => {
       goToPage(page);
     },
     updateCard,
     deleteCard,
+    createCard,
   };
 }
