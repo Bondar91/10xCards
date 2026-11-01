@@ -429,12 +429,12 @@ Merge to `main` (auto-deploy through the Cloudflare Git integration), verify the
 
 #### Automated
 
-- [x] 4.1 `npm run build` passes on merged `main`
-- [x] 4.2 `npm test` passes on merged `main`
+- [x] 4.1 `npm run build` passes on merged `main` — d1fe243
+- [x] 4.2 `npm test` passes on merged `main` — d1fe243
 
 #### Manual
 
-- [x] 4.3 Two-account isolation on production
-- [x] 4.4 Edit and delete end-to-end on production
-- [x] 4.5 `cpuTime` for `GET /api/flashcards` recorded
-- [x] 4.6 No regressions on production
+- [x] 4.3 Two-account isolation on production — d1fe243
+- [x] 4.4 Edit and delete end-to-end on production — d1fe243
+- [x] 4.5 `cpuTime` for `GET /api/flashcards` recorded — d1fe243
+- [x] 4.6 No regressions on production — d1fe243
