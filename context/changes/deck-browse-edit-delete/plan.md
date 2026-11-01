@@ -411,30 +411,30 @@ Merge to `main` (auto-deploy through the Cloudflare Git integration), verify the
 
 #### Automated
 
-- [x] 3.1 Lint passes: `npm run lint`
-- [x] 3.2 Build passes: `npm run build`
-- [x] 3.3 Unit tests still pass: `npm test`
+- [x] 3.1 Lint passes: `npm run lint` — a1120bf
+- [x] 3.2 Build passes: `npm run build` — a1120bf
+- [x] 3.3 Unit tests still pass: `npm test` — a1120bf
 
 #### Manual
 
-- [x] 3.4 Empty state and dashboard link visibility
-- [x] 3.5 Pagination with > 50 cards, stable order
-- [x] 3.6 Inline edit: badge flips, content persists, `due` unchanged
-- [x] 3.7 Single active edit, Anuluj restores, counters and limits enforced
-- [x] 3.8 Delete confirmation, count drops, last-item-on-page moves back
-- [x] 3.9 Signed-out redirect to sign-in with `next=/flashcards`
-- [x] 3.10 No regressions in `/generate` and `/review`
+- [x] 3.4 Empty state and dashboard link visibility — a1120bf
+- [x] 3.5 Pagination with > 50 cards, stable order — a1120bf
+- [x] 3.6 Inline edit: badge flips, content persists, `due` unchanged — a1120bf
+- [x] 3.7 Single active edit, Anuluj restores, counters and limits enforced — a1120bf
+- [x] 3.8 Delete confirmation, count drops, last-item-on-page moves back — a1120bf
+- [x] 3.9 Signed-out redirect to sign-in with `next=/flashcards` — a1120bf
+- [x] 3.10 No regressions in `/generate` and `/review` — a1120bf
 
 ### Phase 4: Production rollout & evidence
 
 #### Automated
 
-- [ ] 4.1 `npm run build` passes on merged `main`
-- [ ] 4.2 `npm test` passes on merged `main`
+- [x] 4.1 `npm run build` passes on merged `main`
+- [x] 4.2 `npm test` passes on merged `main`
 
 #### Manual
 
-- [ ] 4.3 Two-account isolation on production
-- [ ] 4.4 Edit and delete end-to-end on production
-- [ ] 4.5 `cpuTime` for `GET /api/flashcards` recorded
-- [ ] 4.6 No regressions on production
+- [x] 4.3 Two-account isolation on production
+- [x] 4.4 Edit and delete end-to-end on production
+- [x] 4.5 `cpuTime` for `GET /api/flashcards` recorded
+- [x] 4.6 No regressions on production
