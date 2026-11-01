@@ -55,6 +55,16 @@ if (supabase) {
             </a>
           )
         }
+        {
+          flashcardCount !== 0 && (
+            <a
+              href="/flashcards"
+              class="inline-block rounded-lg border border-white/20 bg-white/10 px-5 py-2.5 font-medium text-white transition-colors hover:bg-white/20"
+            >
+              Moje fiszki
+            </a>
+          )
+        }
         <a
           href="/generate"
           class="inline-block rounded-lg bg-purple-600 px-5 py-2.5 font-medium text-white transition-colors hover:bg-purple-500"

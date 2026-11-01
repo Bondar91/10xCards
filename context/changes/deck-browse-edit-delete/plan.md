@@ -396,34 +396,34 @@ Merge to `main` (auto-deploy through the Cloudflare Git integration), verify the
 
 #### Automated
 
-- [x] 2.1 Lint passes: `npm run lint`
-- [x] 2.2 Build passes: `npm run build`
-- [x] 2.3 Unit tests still pass: `npm test`
+- [x] 2.1 Lint passes: `npm run lint` — 6b03fe8
+- [x] 2.2 Build passes: `npm run build` — 6b03fe8
+- [x] 2.3 Unit tests still pass: `npm test` — 6b03fe8
 
 #### Manual
 
-- [x] 2.4 `GET /api/flashcards` pages correctly, stable order, `?page=0` → 400, past-end → empty
-- [x] 2.5 `PATCH` validation, `source` flip, SRS behaviour unchanged
-- [x] 2.6 Cross-user `PATCH` / `DELETE` → 404; unauthenticated → 401
-- [x] 2.7 `DELETE` removes card and its `review_logs`; repeat → 404
+- [x] 2.4 `GET /api/flashcards` pages correctly, stable order, `?page=0` → 400, past-end → empty — 6b03fe8
+- [x] 2.5 `PATCH` validation, `source` flip, SRS behaviour unchanged — 6b03fe8
+- [x] 2.6 Cross-user `PATCH` / `DELETE` → 404; unauthenticated → 401 — 6b03fe8
+- [x] 2.7 `DELETE` removes card and its `review_logs`; repeat → 404 — 6b03fe8
 
 ### Phase 3: Deck UI
 
 #### Automated
 
-- [ ] 3.1 Lint passes: `npm run lint`
-- [ ] 3.2 Build passes: `npm run build`
-- [ ] 3.3 Unit tests still pass: `npm test`
+- [x] 3.1 Lint passes: `npm run lint`
+- [x] 3.2 Build passes: `npm run build`
+- [x] 3.3 Unit tests still pass: `npm test`
 
 #### Manual
 
-- [ ] 3.4 Empty state and dashboard link visibility
-- [ ] 3.5 Pagination with > 50 cards, stable order
-- [ ] 3.6 Inline edit: badge flips, content persists, `due` unchanged
-- [ ] 3.7 Single active edit, Anuluj restores, counters and limits enforced
-- [ ] 3.8 Delete confirmation, count drops, last-item-on-page moves back
-- [ ] 3.9 Signed-out redirect to sign-in with `next=/flashcards`
-- [ ] 3.10 No regressions in `/generate` and `/review`
+- [x] 3.4 Empty state and dashboard link visibility
+- [x] 3.5 Pagination with > 50 cards, stable order
+- [x] 3.6 Inline edit: badge flips, content persists, `due` unchanged
+- [x] 3.7 Single active edit, Anuluj restores, counters and limits enforced
+- [x] 3.8 Delete confirmation, count drops, last-item-on-page moves back
+- [x] 3.9 Signed-out redirect to sign-in with `next=/flashcards`
+- [x] 3.10 No regressions in `/generate` and `/review`
 
 ### Phase 4: Production rollout & evidence
 
